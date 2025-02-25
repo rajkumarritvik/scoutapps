@@ -31,7 +31,7 @@ if(SONIC_SCOUT_FEATURE_COM)
             Db_utils.ml
 
             Schema.ml
-            Schema.mli
+            schema.mli
 
             Match_schedule_table.ml
             Raw_match_data_table.ml
