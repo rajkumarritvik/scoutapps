@@ -45,16 +45,12 @@ let process_qr db qr_format qr_bytes =
          %!"
         __FILE__ __LINE__ qr_format (hex_encode qr_bytes) args
 
-let usage_msg = Printf.sprintf "%s database_file\nadvanced: [--introspect-query file] [--introspect-answer file]" __MODULE_ID__
+let usage_msg = Printf.sprintf "%s database_file" __MODULE_ID__
 let database_file = ref ""
 
 let anon_fun s = database_file := s
 
-let speclist =
-  [("--introspect-query",
-      Arg.String (fun _ -> prerr_endline ("introspect query " ^ __MODULE_ID__)),
-      "Advanced.");
-   ("--introspect-answer", Arg.String ignore, "Advanced.")]
+let speclist = []
 
 let main () =
   (* Set up logging *)

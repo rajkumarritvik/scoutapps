@@ -40,6 +40,7 @@
         "exception": "c",
         "future": "c",
         "*.tbl": "c",
-        "random": "c"
+        "random": "c",
+        "xlocale": "c"
     }
 }

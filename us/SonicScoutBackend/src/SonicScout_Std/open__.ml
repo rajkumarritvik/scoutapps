@@ -13,6 +13,7 @@ module Format = Tr1Stdlib_V414CRuntime.Format
 module Result = Tr1Stdlib_V414Base.Result
 module Sys = Tr1Stdlib_V414CRuntime.Sys
 module Fpath = Tr1Fpath_Std.Fpath
+module Xdg = Tr1Paths_Xdg.Xdg
 
 (* Maintain compatibility with unshadowed OCaml *)
 let prerr_endline = Tr1Stdlib_V414Io.StdIo.prerr_endline
