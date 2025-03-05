@@ -214,17 +214,6 @@ let main () =
     ]
   in
 
-  let default =
-    let open Cmdliner in
-    let i_query = Arg.(value & opt (some file) None & info ["introspect-query"]) in
-    let i_answer = Arg.(value & opt (some string) None & info ["introspect-answer"]) in
-    Cmdliner.Term.(
-      const (fun query_file _ ->
-        match query_file with
-        Some _ -> prerr_endline ("introspect query " ^ __MODULE_ID__)
-        | None -> ())
-      $ i_query $ i_answer)
-  in
-  exit (Cmdliner.Cmd.eval (Cmdliner.Cmd.group ~default info cmds))
+  exit (Cmdliner.Cmd.eval (Cmdliner.Cmd.group info cmds))
 
 let () = main ()
