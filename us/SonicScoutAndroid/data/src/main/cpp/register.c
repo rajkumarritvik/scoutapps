@@ -246,8 +246,8 @@ Java_com_example_squirrelscout_data_OCamlServiceHandler_start_1ocaml(JNIEnv *env
 #define RELEASE_START_OCAML1() do { caml_release_runtime_system(); RELEASE_START_OCAML0(); } while (0)
 
 #ifdef OCAML_LIFECYCLE_ENTIRE_PROCESS
-#define RELEASE_START_OCAML2() 0
-#define RELEASE_START_OCAML3() 0
+#define RELEASE_START_OCAML2() RELEASE_START_OCAML1()
+#define RELEASE_START_OCAML3() RELEASE_START_OCAML2()
     (void) process_argv0;
 
     /* https://github.com/ocaml/ocaml/issues/11486 */
