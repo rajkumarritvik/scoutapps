@@ -108,13 +108,13 @@ let run ?(opts : Utils.opts option) ~slots () =
   let dk_env = Utils.dk_env ?opts () in
   let dk = Utils.dk ~env:dk_env ~slots in
   let dkmlHostAbi =
-    match Tr1HostMachine.abi with
-    | `darwin_x86_64 -> "darwin_x86_64"
-    | `darwin_arm64 -> "darwin_arm64"
-    | `windows_x86_64 -> "windows_x86_64"
-    | `windows_x86 -> "windows_x86"
-    | `linux_x86_64 -> "linux_x86_64"
-    | `linux_x86 -> "linux_x86"
+    match DkCoder_Std.Context.(abi (get_exn ())) with
+    | `Darwin_x86_64 -> "darwin_x86_64"
+    | `Darwin_arm64 -> "darwin_arm64"
+    | `Windows_x86_64 -> "windows_x86_64"
+    | `Windows_x86 -> "windows_x86"
+    | `Linux_x86_64 -> "linux_x86_64"
+    | `Linux_x86 -> "linux_x86"
     | _ ->
         failwith "Currently your host machine is not supported by Sonic Scout"
   in

@@ -57,8 +57,8 @@ let package ~notarize () =
   let projectdir = Fpath.(cwd / "us" / "SonicScoutBackend") in
   let builddir = Fpath.(projectdir // build_reldir) in
   let tools_dir = Qt.tools_dir ~projectdir in
-  match Tr1HostMachine.abi with
-  | `darwin_x86_64 | `darwin_arm64 ->
+  match DkCoder_Std.Context.(abi (get_exn ())) with
+  | `Darwin_x86_64 | `Darwin_arm64 ->
       let env = OS.Env.current () |> rmsg in
       let env =
         if notarize then env |> OSEnvMap.(add "SCOUT_NOTARIZE" "1") else env
@@ -78,7 +78,7 @@ let package ~notarize () =
           / "SonicScoutBackend-1.0.0-Darwin" / "SonicScoutQRScanner.dmg")
       in
       Logs.app (fun l -> l "The macOS dmg for publishing is at %a" Fpath.pp dmg)
-  | `windows_x86_64 | `windows_x86 | `windows_arm32 | `windows_arm64 ->
+  | `Windows_x86_64 | `Windows_x86 | `Windows_arm32 | `Windows_arm64 ->
       let default_search =
         OS.Cmd.search_path_dirs (Sys.getenv "PATH") |> rmsg
       in
@@ -126,7 +126,7 @@ let package ~notarize () =
         let cmake_zip = Fpath.(tools_dir / "cmake.zip") in
         (* https://github.com/Kitware/CMake/releases/download/v3.30.0-rc4/cmake-3.30.0-rc4-windows-x86_64.zip *)
         Lwt_main.run
-        @@ DkNet_Std.Http.download_uri ~max_time_ms:300_000
+        @@ DkNet_Std.Http.download_url ~max_time_ms:300_000
              ~checksum:
                (`SHA_256
                  "9086fa9c83e5a3da2599220d4e426d1dfeefac417f2abf19862a91620c38faee")
@@ -200,14 +200,14 @@ let run ?(opts = Utils.default_opts) ?global_dkml ~slots () =
   let dk_env = dk_env ~opts () in
   let dk = dk ~env:dk_env in
   let preset =
-    match Tr1HostMachine.abi with
-    | `darwin_x86_64 -> "dev-AppleIntel"
-    | `darwin_arm64 ->
+    match DkCoder_Std.Context.(abi (get_exn ())) with
+    | `Darwin_x86_64 -> "dev-AppleIntel"
+    | `Darwin_arm64 ->
         (* We would like [dev-AppleSilicon]. But only Qt6.2.0+ are universal binaries!
            So until the manager app (SonicScoutBackend) has an upgrade to Qt6, we are stuck with Rosetta emulation. *)
         "dev-AppleIntel"
-    | `windows_x86_64 -> "dev-Windows64"
-    | `linux_x86_64 -> "dev-Linux-x86_64"
+    | `Windows_x86_64 -> "dev-Windows64"
+    | `Linux_x86_64 -> "dev-Linux-x86_64"
     | _ ->
         failwith "Currently your host machine is not supported by Sonic Scout"
   in

@@ -190,8 +190,6 @@ module Cli = struct
       ]
 end
 
-let __init () =
-  if Tr1EntryName.module_id = __MODULE_ID__ then begin
-    Tr1Logs_Term.TerminalCliOptions.init ();
-    StdExit.exit (Cmdliner.Cmd.eval Cli.groups_cmd)
-  end
+let __init (_ : DkCoder_Std.Context.t) =
+  Tr1Logs_Term.TerminalCliOptions.init ();
+  StdExit.exit (Cmdliner.Cmd.eval Cli.groups_cmd)

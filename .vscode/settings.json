@@ -1,7 +1,8 @@
 {
     "ocaml.sandbox": {
         "kind": "custom",
-        "template": "${firstWorkspaceFolder}/dk DkRun_Project.RunQuiet --log-level ERROR --fixed-length-modules false -- MlStd_Std.Exec --merlin -- $prog $args"
+        "template": "${firstWorkspaceFolder}/dk -l ERROR Run Ml.Exec --merlin -- $prog $args"
+        // "template": "${firstWorkspaceFolder}/dk DkRun_Project.RunQuiet --log-level ERROR --fixed-length-modules false -- MlStd_Std.Exec --merlin -- $prog $args"
         // "template": "${firstWorkspaceFolder}/.ci/cmake/bin/cmake -E env DKRUN_ENV_URL_BASE=file://Y:/source/dksdk-coder -- ${firstWorkspaceFolder}/dk.cmd DkRun_Env.RunQuiet --log-level ERROR --fixed-length-modules false -- MlStd_Std.Exec --merlin -- $prog $args"
     },
     // CMake is for SonicScoutBackend since SonicScoutAndroid has indeterminate
@@ -42,5 +43,10 @@
         "*.tbl": "c",
         "random": "c",
         "xlocale": "c"
-    }
+    },
+    "go.tasks.provideDefault": false,
+    "go.terminal.activateEnvironment": false,
+    "go.testExplorer.enable": false,
+    "npm.autoDetect": "off",
+    "rust-analyzer.initializeStopped": true
 }

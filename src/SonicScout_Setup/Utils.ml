@@ -305,8 +305,8 @@ let dk ?env ~slots args =
   OS.Cmd.run ~env Cmd.(script %% of_list args) |> rmsg
 
 let dk_ninja_link_or_copy ~dk =
-  match Tr1HostMachine.abi with
-  | `windows_x86_64 | `windows_x86 ->
+  match DkCoder_Std.Context.(abi (get_exn ())) with
+  | `Windows_x86_64 | `Windows_x86 ->
       (* Avoid error 'failed to create symbolic link' for dksdk.ninja.link on Win32 *)
       dk [ "dksdk.ninja.copy"; "QUIET" ]
   | _ -> dk [ "dksdk.ninja.link"; "QUIET" ]
