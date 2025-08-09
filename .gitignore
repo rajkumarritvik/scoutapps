@@ -24,7 +24,6 @@ msvc2019_64/
 
 # vscode
 /.vscode/settings-local.json
-/.vscode/tasks.json
 
 # scratch space
 /scratch/

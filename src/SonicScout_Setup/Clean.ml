@@ -27,6 +27,7 @@ let clean (_ : Tr1Logs_Term.TerminalCliOptions.t) areas =
       | _ -> ()
     end;
     Dependencies.clean areas;
+    DotNetBuild.clean areas;
     CMakeNinja.clean areas;
     ScoutAndroid.clean areas;
     ScoutBackend.clean areas;
@@ -84,6 +85,9 @@ module Cli = struct
               [ "backend-builds" ] );
           ( [ `AndroidBuilds; `BackendBuilds ],
             info ~docs:s_areas ~doc:"Clean the build artifacts." [ "builds" ] );
+          ( [ `DotNet ],
+            info ~docs:s_areas ~doc:"Clean the C# .NET artifacts." [ "dotnet" ]
+          );
           ( [ `DkCoderWork ],
             info ~docs:s_areas ~doc:"Clean the DkCoder work directories."
               [ "dkcoder-work" ] );
@@ -105,6 +109,7 @@ module Cli = struct
               `DkSdkSourceCode;
               `DkSdkCMake;
               `DkCoderWork;
+              `DotNet;
               `QtInstallation;
               `MavenRepository;
             ],
@@ -126,6 +131,6 @@ module Cli = struct
         $ areas_t)
 end
 
-let () =
+let __init (_ : DkCoder_Std.Context.t) =
   Tr1Logs_Term.TerminalCliOptions.init ();
   StdExit.exit (Cmdliner.Cmd.eval Cli.cmd)

@@ -48,5 +48,25 @@
     "go.terminal.activateEnvironment": false,
     "go.testExplorer.enable": false,
     "npm.autoDetect": "off",
-    "rust-analyzer.initializeStopped": true
+    "rust-analyzer.initializeStopped": true,
+    "markdown.preview.openMarkdownLinks": "inPreview",
+    "markdown-preview-enhanced.automaticallyShowPreviewOfMarkdownBeingEdited": true,
+    "[xaml]": {
+        "editor.defaultFormatter": "dabbinavo.xamlstyler"
+    },
+    "VsCodeTaskButtons.showCounter": false,
+    "VsCodeTaskButtons.tasks": [
+        {
+            "alignment": "right",
+            "label": "$(beaker) Build .NET",
+            "task": "Build .NET",
+            "tooltip": "Build the .NET Browser application"
+        },
+        {
+            "alignment": "right",
+            "label": "$(eye) Show .NET",
+            "task": "Show .NET",
+            "tooltip": "Show the .NET Browser application"
+        }
+    ]
 }
