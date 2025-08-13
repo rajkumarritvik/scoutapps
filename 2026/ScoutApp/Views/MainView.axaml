@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:ScoutApp.ViewModels"
-    d:DesignHeight="650"
+    d:DesignHeight="600"
     d:DesignWidth="800"
     x:DataType="vm:MainViewModel"
     mc:Ignorable="d">
@@ -30,59 +30,79 @@
         VerticalAlignment="Top"
         Background="Gainsboro"
         ColumnDefinitions="Auto,*"
-        RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+        RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
 
         <!--  BEGIN string  -->
         <TextBlock
             Grid.Row="0"
             Grid.Column="0"
             FontWeight="Bold">
-            A "string" field:
+            Scout Name:
         </TextBlock>
         <TextBox
             Grid.Row="0"
             Grid.Column="1"
-            Text="{Binding StringField1}" />
+            Text="{Binding ScoutName}" />
         <!--  END string  -->
 
-        <!--  BEGIN bool  -->
+        <!--  BEGIN int  -->
         <TextBlock
             Grid.Row="1"
             Grid.Column="0"
             FontWeight="Bold">
-            A "bool" field:
+            Match Number:
         </TextBlock>
-        <CheckBox
+        <NumericUpDown
             Grid.Row="1"
             Grid.Column="1"
-            IsChecked="{Binding BoolField1}" />
-        <!--  END bool  -->
+            FormatString="0"
+            Minimum="0"
+            Value="{Binding MatchNumber}" />
+        <!--  END int  -->
+
+        <!--  BEGIN int  -->
+        <TextBlock
+            Grid.Row="2"
+            Grid.Column="0"
+            FontWeight="Bold">
+            Team Number:
+        </TextBlock>
+        <NumericUpDown
+            Grid.Row="2"
+            Grid.Column="1"
+            FormatString="0"
+            Minimum="0"
+            Value="{Binding TeamNumber32}" />
+        <!--  END int  -->
 
         <!--  BEGIN enum  -->
         <TextBlock
             Grid.Row="3"
             Grid.Column="0"
             FontWeight="Bold">
-            An "enum" field:
+            Starting Position:
         </TextBlock>
-        <StackPanel Grid.Row="3" Grid.Column="1">
+        <StackPanel
+            Grid.Row="3"
+            Grid.Column="1"
+            Orientation="Horizontal">
             <RadioButton
-                Content="Option 1. A"
-                GroupName="Options1"
-                IsChecked="{Binding EnumField1, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:Options1.Option1A}}" />
+                Content="Left"
+                GroupName="AutoStartingPosition"
+                IsChecked="{Binding SPosition2025, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:AutoStartingPosition.Left}}" />
             <RadioButton
-                Content="Option 1. B"
-                GroupName="Options1"
-                IsChecked="{Binding EnumField1, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:Options1.Option1B}}" />
+                Content="Middle"
+                GroupName="AutoStartingPosition"
+                IsChecked="{Binding SPosition2025, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:AutoStartingPosition.Middle}}" />
             <RadioButton
-                Content="Option 1. C"
-                GroupName="Options1"
-                IsChecked="{Binding EnumField1, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:Options1.Option1C}}" />
+                Content="Right"
+                GroupName="StartingPosition"
+                IsChecked="{Binding SPosition2025, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:AutoStartingPosition.Right}}" />
         </StackPanel>
         <!--  END enum  -->
 
         <StackPanel
-            Grid.Row="5"
+            Grid.Row="7"
             Grid.Column="0"
             Grid.ColumnSpan="2">
             <TextBlock FontWeight="Bold">
@@ -92,7 +112,7 @@
         </StackPanel>
 
         <Image
-            Grid.Row="6"
+            Grid.Row="8"
             Grid.Column="0"
             Grid.ColumnSpan="2"
             MaxWidth="300"
@@ -105,10 +125,9 @@
             Orientation="Vertical">
 
             <!--  All the new fields go below  -->
-
             <Grid
                 Width="425"
-                Height="365"
+                Height="425"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Background="Gainsboro"
@@ -120,17 +139,15 @@
                     Grid.Row="0"
                     Grid.Column="0"
                     Orientation="Vertical">
-                    <!--  BEGIN int  -->
+
+                    <!--  BEGIN bool  -->
                     <StackPanel Orientation="Horizontal">
                         <TextBlock FontWeight="Bold">
-                            Team Number:
+                            Preplaced Coral:
                         </TextBlock>
-                        <NumericUpDown
-                            FormatString="0"
-                            Minimum="0"
-                            Value="{Binding TeamNumber32}" />
+                        <CheckBox IsChecked="{Binding PreplacedCoral}" />
                     </StackPanel>
-                    <!--  END int  -->
+                    <!--  END bool  -->
 
 
                     <!--  BEGIN int  -->
@@ -296,6 +313,15 @@
                     Grid.Column="1"
                     Orientation="Vertical">
 
+                    <!--  BEGIN bool  -->
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontWeight="Bold">
+                            Ground Intake:
+                        </TextBlock>
+                        <CheckBox IsChecked="{Binding GroundPickup}" />
+                    </StackPanel>
+                    <!--  END bool  -->
+
 
                     <!--  BEGIN int  -->
                     <StackPanel Orientation="Horizontal">
@@ -447,7 +473,81 @@
                     <!--  END int  -->
 
 
+
+                    <!--  BEGIN enum  -->
+                    <TextBlock
+                        Grid.Row="3"
+                        Grid.Column="0"
+                        FontWeight="Bold">
+                        Breakdown:
+                    </TextBlock>
+                    <StackPanel Grid.Row="3">
+                        <RadioButton
+                            Content="None"
+                            GroupName="TBreakdown2025"
+                            IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:TBreakdown2025.None}}" />
+                        <RadioButton
+                            Content="Tipped"
+                            GroupName="TBreakdown2025"
+                            IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:TBreakdown2025.Tipped}}" />
+                        <RadioButton
+                            Content="Mechanical Failure"
+                            GroupName="TBreakdown2025"
+                            IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:TBreakdown2025.MechanicalFailure}}" />
+                        <RadioButton
+                            Content="Incapacitated"
+                            GroupName="TBreakdown2025"
+                            IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:TBreakdown2025.Incapacitated}}" />
+                        <RadioButton
+                            Content="Coral Stuck"
+                            GroupName="TBreakdown2025"
+                            IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:TBreakdown2025.CoralStuck}}" />
+                        <RadioButton
+                            Content="Stuck on Algae"
+                            GroupName="TBreakdown2025"
+                            IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:TBreakdown2025.StuckOnAlgae}}" />
+                    </StackPanel>
+                    <!--  END enum  -->
+
+
+
+                    <!--  BEGIN enum  -->
+                    <TextBlock
+                        Grid.Row="6"
+                        Grid.Column="0"
+                        FontWeight="Bold">
+                        Climb:
+                    </TextBlock>
+                    <StackPanel Grid.Row="6" Grid.Column="0">
+                        <RadioButton
+                            Content="Success"
+                            GroupName="EClimb2025"
+                            IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:EClimb2025.Success}}" />
+                        <RadioButton
+                            Content="Failed"
+                            GroupName="EClimb2025"
+                            IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:EClimb2025.Failed}}" />
+                        <RadioButton
+                            Content="Did Not Attempt"
+                            GroupName="EClimb2025"
+                            IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:EClimb2025.DidNotAttempt}}" />
+                        <RadioButton
+                            Content="Deep Cage"
+                            GroupName="EClimb2025"
+                            IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:EClimb2025.DeepCage}}" />
+                        <RadioButton
+                            Content="Shallow Cage"
+                            GroupName="EClimb2025"
+                            IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:EClimb2025.ShallowCage}}" />
+                        <RadioButton
+                            Content="Parked"
+                            GroupName="EClimb2025"
+                            IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:EClimb2025.Parked}}" />
+                    </StackPanel>
+                    <!--  END enum  -->
+
                 </StackPanel>
+
             </Grid>
 
 
@@ -462,4 +562,5 @@
         </StackPanel>
 
     </Grid>
+
 </UserControl>

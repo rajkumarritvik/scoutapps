@@ -8,11 +8,35 @@ using QRCoder;
 namespace ScoutApp.ViewModels
 {
     // BEGIN enum (part 1)
-    public enum Options1
+    public enum AutoStartingPosition
     {
-        Option1A,
-        Option1B,
-        Option1C
+        Left,
+        Middle,
+        Right
+    }
+    // END enum (part 1)
+
+    // BEGIN enum (part 1)
+    public enum TBreakdown2025
+    {
+        None,
+        Tipped,
+        MechanicalFailure,
+        Incapacitated,
+        CoralStuck,
+        StuckOnAlgae
+    }
+    // END enum (part 1)
+
+    // BEGIN enum (part 1)
+    public enum EClimb2025
+    {
+        Success,
+        Failed,
+        DidNotAttempt,
+        DeepCage,
+        Parked,
+        ShallowCage
     }
     // END enum (part 1)
 
@@ -26,14 +50,14 @@ namespace ScoutApp.ViewModels
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private string? _StringField1;
+        private string? _ScoutName;
         // END string
 
         // BEGIN bool
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private bool _BoolField1 = true;
+        private bool _PreplacedCoral = false;
         // END bool
 
         // BEGIN int
@@ -47,9 +71,16 @@ namespace ScoutApp.ViewModels
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
+        private int _MatchNumber = 0;
+        // END int
+
+        // BEGIN int
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
+        [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _AutoCoralL4Score = 0;
         // END int
-        
+
         // BEGIN int
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
@@ -77,7 +108,7 @@ namespace ScoutApp.ViewModels
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _AutoCoralL4Miss = 0;
         // END int
-        
+
         // BEGIN int
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
@@ -102,13 +133,20 @@ namespace ScoutApp.ViewModels
 
 
 
+        // BEGIN bool
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
+        [NotifyPropertyChangedFor(nameof(QRCode1))]
+        private bool _GroundPickup = false;
+        // END bool
+
         // BEGIN int
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _TeleOpCoralL4Score = 0;
         // END int
-        
+
         // BEGIN int
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
@@ -136,7 +174,7 @@ namespace ScoutApp.ViewModels
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _TeleOpCoralL4Miss = 0;
         // END int
-        
+
         // BEGIN int
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
@@ -158,13 +196,13 @@ namespace ScoutApp.ViewModels
         private int _TeleOpCoralL1Miss = 0;
         // END int
 
-// BEGIN int
+        // BEGIN int
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _AutoProcessorScore = 0;
         // END int
-        
+
         // BEGIN int
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
@@ -192,7 +230,7 @@ namespace ScoutApp.ViewModels
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _TeleOpProcessorScore = 0;
         // END int
-        
+
         // BEGIN int
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
@@ -221,7 +259,21 @@ namespace ScoutApp.ViewModels
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private Options1 _EnumField1 = Options1.Option1A;
+        private AutoStartingPosition _SPosition2025;
+        // END enum (part 2)
+
+        // BEGIN enum (part 2)
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
+        [NotifyPropertyChangedFor(nameof(QRCode1))]
+        private TBreakdown2025 _TeleOpBreakdown;
+        // END enum (part 2)
+
+        // BEGIN enum (part 2)
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(EverythingAllAtOnce))]
+        [NotifyPropertyChangedFor(nameof(QRCode1))]
+        private EClimb2025 _TeleOpClimb;
         // END enum (part 2)
 
         // EverythingAllAtOnce will change based on all the fields that
@@ -232,10 +284,11 @@ namespace ScoutApp.ViewModels
             {
                 {
                     return $$"""
-StringField1:{{StringField1}}
-BoolField1:{{BoolField1}}
-EnumField1:{{EnumField1}}
+ScoutName:{{ScoutName}}
+AutoStartingPosition:{{SPosition2025}}
 TeamNumber:{{TeamNumber32}}
+MatchNumber:{{MatchNumber}}
+PreplacedCoral:{{PreplacedCoral}}
 AutoL4-Score:{{AutoCoralL4Score}}
 AutoL3-Score:{{AutoCoralL3Score}}
 AutoL2-Score:{{AutoCoralL2Score}}
@@ -244,6 +297,7 @@ AutoL4-Miss:{{AutoCoralL4Miss}}
 AutoL3-Miss:{{AutoCoralL3Miss}}
 AutoL2-Miss:{{AutoCoralL2Miss}}
 AutoL1-Miss:{{AutoCoralL1Miss}}
+GroundPickup"{{GroundPickup}}
 TeleOpL4-Score:{{TeleOpCoralL4Score}}
 TeleOpL3-Score:{{TeleOpCoralL3Score}}
 TeleOpL2-Score:{{TeleOpCoralL2Score}}
@@ -260,6 +314,8 @@ TeleOpProcessor-Score:{{TeleOpProcessorScore}}
 TeleOpProcessor-Miss:{{TeleOpProcessorMiss}}
 TeleOpNet-Score:{{TeleOpNetScore}}
 TeleOpNet-Miss:{{TeleOpNetMiss}}
+TeleOpBreakdown:{{TeleOpBreakdown}}
+Climb:{{TeleOpClimb}}
 """;
                 }
             }
@@ -273,10 +329,11 @@ TeleOpNet-Miss:{{TeleOpNetMiss}}
             {
                 string textForQRCode =
                     $$"""
-SF1-{{StringField1}}
-BF1-{{BoolField1}}
-EF1-{{EnumField1}}
+3-{{ScoutName}}
+40-{{SPosition2025}}
 53-{{TeamNumber32}}
+2-{{MatchNumber}}
+54-{{PreplacedCoral}}
 28-{{AutoCoralL4Score}}
 29-{{AutoCoralL3Score}}
 30-{{AutoCoralL2Score}}
@@ -285,6 +342,7 @@ EF1-{{EnumField1}}
 37-{{AutoCoralL3Miss}}
 38-{{AutoCoralL2Miss}}
 39-{{AutoCoralL1Miss}}
+50-{{GroundPickup}}
 41-{{TeleOpCoralL4Score}}
 42-{{TeleOpCoralL3Score}}
 43-{{TeleOpCoralL2Score}}
@@ -301,6 +359,8 @@ EF1-{{EnumField1}}
 46-{{TeleOpProcessorMiss}}
 47-{{TeleOpNetScore}}
 48-{{TeleOpNetMiss}}
+51-{{TeleOpBreakdown}}
+52-{{TeleOpClimb}}
 """;
                 using (QRCodeGenerator qrGenerator = new QRCodeGenerator())
                 using (QRCodeData qrCodeData = qrGenerator.CreateQrCode(textForQRCode, QRCodeGenerator.ECCLevel.Q))
