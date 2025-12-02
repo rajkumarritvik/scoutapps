@@ -1,6 +1,7 @@
 using System.IO;
 using Avalonia.Media.Imaging;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using QRCoder;
 
 // Use Alt-Shift-F to format. Do this continually!
@@ -42,6 +43,15 @@ namespace ScoutApp.ViewModels
 
     public partial class MainViewModel : ObservableObject
     {
+         [ObservableProperty]
+        private bool showText = true;
+
+        [RelayCommand]
+        private void ToggleText()
+        {
+            ShowText = !ShowText;
+        }
+
         public MainViewModel()
         {
         }

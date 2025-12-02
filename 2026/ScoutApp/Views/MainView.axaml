@@ -101,19 +101,22 @@
                     IsChecked="{Binding SPosition2025, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:AutoStartingPosition.Right}}" />
             </StackPanel>
             <!--  END enum  -->
-
+           
             <StackPanel
-                Grid.Row="7"
-                Grid.Column="0"
-                Grid.ColumnSpan="2">
-                <TextBlock FontWeight="Bold">
-                    Everything All At Once
-                </TextBlock>
-                <TextBox IsReadOnly="True" Text="{Binding EverythingAllAtOnce, Mode=OneWay}" />
+            Orientation="Vertical"
+            Grid.Row="10"
+            Grid.Column="0">
+                <Button
+                    Content="Everything All At Once"
+                    FontWeight="Bold"
+                    Command="{Binding ToggleTextCommand}"/>
+                <TextBlock
+                    IsVisible="{Binding ShowText}"
+                    Text="{Binding EverythingAllAtOnce, Mode=OneWay}" />
             </StackPanel>
-
+            
             <Image
-                Grid.Row="8"
+                Grid.Row="20"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
                 MaxWidth="300"
@@ -148,7 +151,6 @@
                             <CheckBox IsChecked="{Binding PreplacedCoral}" />
                         </StackPanel>
                         <!--  END bool  -->
-
 
                         <!--  BEGIN int  -->
                         <StackPanel Orientation="Horizontal">
@@ -198,7 +200,6 @@
                         </StackPanel>
                         <!--  END int  -->
 
-
                         <!--  BEGIN int  -->
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Width="175" FontWeight="Bold">
@@ -247,7 +248,6 @@
                         </StackPanel>
                         <!--  END int  -->
 
-
                         <!--  BEGIN int  -->
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Width="175" FontWeight="Bold">
@@ -271,7 +271,6 @@
                                 Value="{Binding AutoProcessorMiss}" />
                         </StackPanel>
                         <!--  END int  -->
-
 
                         <!--  BEGIN int  -->
                         <StackPanel Orientation="Horizontal">
@@ -297,43 +296,45 @@
                         </StackPanel>
                         <!--  END int  -->
 
-
-                        <!--  BEGIN enum  -->
-                        <TextBlock Width="175" FontWeight="Bold">
-                            Breakdown:
+                        <TextBlock Width="271" FontWeight="Bold">
+                        Teleop Breakdown:
                         </TextBlock>
-                        <StackPanel>
-                            <RadioButton
+
+                        <ComboBox Width="271" FontWeight="Bold">
+                            <ComboBoxItem>
+                                <RadioButton
                                 Content="None"
                                 GroupName="TBreakdown2025"
-                                IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:TBreakdown2025.None}}" />
+                                IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:TBreakdown2025.None}}" /> </ComboBoxItem>
+                            <ComboBoxItem>
                             <RadioButton
                                 Content="Tipped"
                                 GroupName="TBreakdown2025"
-                                IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:TBreakdown2025.Tipped}}" />
-                            <RadioButton
+                                IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:TBreakdown2025.Tipped}}" /> </ComboBoxItem>
+                            <ComboBoxItem>
+                                <RadioButton
                                 Content="Mechanical Failure"
                                 GroupName="TBreakdown2025"
-                                IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:TBreakdown2025.MechanicalFailure}}" />
-                            <RadioButton
+                                IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:TBreakdown2025.MechanicalFailure}}" /> </ComboBoxItem>
+                            <ComboBoxItem>
+                                <RadioButton
                                 Content="Incapacitated"
                                 GroupName="TBreakdown2025"
-                                IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:TBreakdown2025.Incapacitated}}" />
-                            <RadioButton
+                                IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:TBreakdown2025.Incapacitated}}" /> </ComboBoxItem>
+                            <ComboBoxItem>
+                                <RadioButton
                                 Content="Coral Stuck"
                                 GroupName="TBreakdown2025"
-                                IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:TBreakdown2025.CoralStuck}}" />
-                            <RadioButton
+                                IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:TBreakdown2025.CoralStuck}}" /> </ComboBoxItem>
+                            <ComboBoxItem>
+                                <RadioButton
                                 Content="Stuck on Algae"
                                 GroupName="TBreakdown2025"
-                                IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:TBreakdown2025.StuckOnAlgae}}" />
-                        </StackPanel>
-                        <!--  END enum  -->
-
+                                IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:TBreakdown2025.StuckOnAlgae}}" /> </ComboBoxItem>
+                        
+                        </ComboBox>
+                        
                     </StackPanel>
-
-
-
 
 
                     <!--  RIGHT COLUMN  -->
@@ -350,7 +351,6 @@
                             <CheckBox IsChecked="{Binding GroundPickup}" />
                         </StackPanel>
                         <!--  END bool  -->
-
 
                         <!--  BEGIN int  -->
                         <StackPanel Orientation="Horizontal">
@@ -400,7 +400,6 @@
                         </StackPanel>
                         <!--  END int  -->
 
-
                         <!--  BEGIN int  -->
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Width="175" FontWeight="Bold">
@@ -449,7 +448,6 @@
                         </StackPanel>
                         <!--  END int  -->
 
-
                         <!--  BEGIN int  -->
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Width="175" FontWeight="Bold">
@@ -473,7 +471,6 @@
                                 Value="{Binding TeleOpProcessorMiss}" />
                         </StackPanel>
                         <!--  END int  -->
-
 
                         <!--  BEGIN int  -->
                         <StackPanel Orientation="Horizontal">
@@ -499,39 +496,43 @@
                         </StackPanel>
                         <!--  END int  -->
 
-
-                        <!--  BEGIN enum  -->
-                        <TextBlock Width="175" FontWeight="Bold">
+                        <TextBlock Width="271" FontWeight="Bold">
                             Climb:
                         </TextBlock>
-                        <StackPanel>
-                            <RadioButton
+
+                        <ComboBox Width="271" FontWeight="Bold">
+                            <ComboBoxItem>
+                                <RadioButton
                                 Content="Success"
                                 GroupName="EClimb2025"
-                                IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:EClimb2025.Success}}" />
-                            <RadioButton
+                                IsChecked="{Binding TeleOpClimb, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:EClimb2025.Success}}" /> </ComboBoxItem>
+                            <ComboBoxItem>
+                                <RadioButton
                                 Content="Failed"
                                 GroupName="EClimb2025"
-                                IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:EClimb2025.Failed}}" />
-                            <RadioButton
+                                IsChecked="{Binding TeleOpClimb, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:EClimb2025.Failed}}" /> </ComboBoxItem>
+                            <ComboBoxItem>
+                                <RadioButton
                                 Content="Did Not Attempt"
                                 GroupName="EClimb2025"
-                                IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:EClimb2025.DidNotAttempt}}" />
-                            <RadioButton
+                                IsChecked="{Binding TeleOpClimb, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:EClimb2025.DidNotAttempt}}" /> </ComboBoxItem>
+                            <ComboBoxItem>
+                                <RadioButton
                                 Content="Deep Cage"
                                 GroupName="EClimb2025"
-                                IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:EClimb2025.DeepCage}}" />
-                            <RadioButton
+                                IsChecked="{Binding TeleOpClimb, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:EClimb2025.DeepCage}}" /> </ComboBoxItem>
+                            <ComboBoxItem>
+                                <RadioButton
                                 Content="Shallow Cage"
                                 GroupName="EClimb2025"
-                                IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:EClimb2025.ShallowCage}}" />
-                            <RadioButton
+                                IsChecked="{Binding TeleOpClimb, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:EClimb2025.ShallowCage}}" /> </ComboBoxItem>
+                            <ComboBoxItem>
+                                <RadioButton
                                 Content="Parked"
                                 GroupName="EClimb2025"
-                                IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:EClimb2025.Parked}}" />
-                        </StackPanel>
-                        <!--  END enum  -->
-
+                                IsChecked="{Binding TeleOpClimb, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:EClimb2025.Parked}}" /> </ComboBoxItem>
+                        </ComboBox>
+                        
                     </StackPanel>
 
                 </Grid>
