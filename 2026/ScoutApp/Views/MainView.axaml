@@ -146,59 +146,100 @@
                         Grid.Column="0"
                         Orientation="Vertical">
 
-                        <TextBlock Width="130" FontWeight="Bold">
-                            AUTO
-                        </TextBlock>
+                        <Button
+                            Height="32"
+                            Command="{Binding ToggleAutoCommand}"
+                            Content="AUTO"
+                            FontWeight="Bold" />
 
-                        <TextBlock Height="32" FontWeight="Bold">
+                        <TextBlock
+                            Width="130"
+                            Height="32"
+                            FontWeight="Bold"
+                            IsVisible="{Binding ShowAuto}">
                             L4
                         </TextBlock>
 
-                        <TextBlock Height="32" FontWeight="Bold">
+                        <TextBlock
+                            Height="32"
+                            FontWeight="Bold"
+                            IsVisible="{Binding ShowAuto}">
                             L3
                         </TextBlock>
 
-                        <TextBlock Height="32" FontWeight="Bold">
+                        <TextBlock
+                            Height="32"
+                            FontWeight="Bold"
+                            IsVisible="{Binding ShowAuto}">
                             L2
                         </TextBlock>
 
-                        <TextBlock Height="32" FontWeight="Bold">
+                        <TextBlock
+                            Height="32"
+                            FontWeight="Bold"
+                            IsVisible="{Binding ShowAuto}">
                             L1
                         </TextBlock>
 
-                        <TextBlock Height="32" FontWeight="Bold">
+                        <TextBlock
+                            Height="32"
+                            FontWeight="Bold"
+                            IsVisible="{Binding ShowAuto}">
                             Processor
                         </TextBlock>
 
-                        <TextBlock Height="32" FontWeight="Bold">
+                        <TextBlock
+                            Height="32"
+                            FontWeight="Bold"
+                            IsVisible="{Binding ShowAuto}">
                             Net
                         </TextBlock>
 
-                        <TextBlock FontWeight="Bold">
-                            TELEOP
-                        </TextBlock>
+                        <Button
+                            Height="32"
+                            Command="{Binding ToggleTeleOpCommand}"
+                            Content="TELEOP"
+                            FontWeight="Bold" />
 
-                        <TextBlock Height="32" FontWeight="Bold">
+                        <TextBlock
+                            Height="32"
+                            FontWeight="Bold"
+                            IsVisible="{Binding ShowTeleOp}">
                             L4
                         </TextBlock>
 
-                        <TextBlock Height="32" FontWeight="Bold">
+                        <TextBlock
+                            Height="32"
+                            FontWeight="Bold"
+                            IsVisible="{Binding ShowTeleOp}">
                             L3
                         </TextBlock>
 
-                        <TextBlock Height="32" FontWeight="Bold">
+                        <TextBlock
+                            Height="32"
+                            FontWeight="Bold"
+                            IsVisible="{Binding ShowTeleOp}">
                             L2
                         </TextBlock>
 
-                        <TextBlock Height="32" FontWeight="Bold">
+                        <TextBlock
+                            Height="32"
+                            FontWeight="Bold"
+                            IsVisible="{Binding ShowTeleOp}">
                             L1
                         </TextBlock>
 
-                        <TextBlock Height="32" FontWeight="Bold">
+                        <TextBlock
+                            Height="32"
+                            FontWeight="Bold"
+                            IsVisible="{Binding ShowTeleOp}">
                             Processor
                         </TextBlock>
 
-                        <TextBlock Height="32" FontWeight="Bold">
+                        <TextBlock
+                            Height="32"
+                            FontWeight="Bold"
+                            IsVisible="{Binding ShowTeleOp}">
                             Net
                         </TextBlock>
 
@@ -209,79 +250,91 @@
                         Grid.Column="1"
                         Orientation="Vertical">
 
-                        <TextBlock FontWeight="Bold">
+                        <TextBlock Height="32" FontWeight="Bold">
                             SCORE
                         </TextBlock>
 
                         <NumericUpDown
                             FormatString="0"
+                            IsVisible="{Binding ShowAuto}"
                             Minimum="0"
                             Value="{Binding AutoCoralL4Score}" />
 
                         <NumericUpDown
                             FormatString="0"
+                            IsVisible="{Binding ShowAuto}"
                             Minimum="0"
                             Value="{Binding AutoCoralL3Score}" />
 
                         <NumericUpDown
                             FormatString="0"
+                            IsVisible="{Binding ShowAuto}"
                             Minimum="0"
                             Value="{Binding AutoCoralL2Score}" />
 
                         <NumericUpDown
                             FormatString="0"
+                            IsVisible="{Binding ShowAuto}"
                             Minimum="0"
                             Value="{Binding AutoCoralL1Score}" />
 
                         <NumericUpDown
                             FormatString="0"
+                            IsVisible="{Binding ShowAuto}"
                             Minimum="0"
                             Value="{Binding AutoProcessorScore}" />
 
                         <NumericUpDown
                             FormatString="0"
+                            IsVisible="{Binding ShowAuto}"
                             Minimum="0"
                             Value="{Binding AutoNetScore}" />
 
-                        <TextBlock FontWeight="Bold">
+                        <TextBlock Height="32" FontWeight="Bold">
                             SCORE
                         </TextBlock>
 
                         <NumericUpDown
                             FormatString="0"
+                            IsVisible="{Binding ShowTeleOp}"
                             Minimum="0"
                             Value="{Binding TeleOpCoralL4Score}" />
 
                         <NumericUpDown
                             FormatString="0"
+                            IsVisible="{Binding ShowTeleOp}"
                             Minimum="0"
                             Value="{Binding TeleOpCoralL3Score}" />
 
                         <NumericUpDown
                             FormatString="0"
+                            IsVisible="{Binding ShowTeleOp}"
                             Minimum="0"
                             Value="{Binding TeleOpCoralL2Score}" />
 
                         <NumericUpDown
                             FormatString="0"
+                            IsVisible="{Binding ShowTeleOp}"
                             Minimum="0"
                             Value="{Binding TeleOpCoralL1Score}" />
 
                         <NumericUpDown
                             FormatString="0"
+                            IsVisible="{Binding ShowTeleOp}"
                             Minimum="0"
                             Value="{Binding TeleOpProcessorScore}" />
 
                         <NumericUpDown
                             FormatString="0"
+                            IsVisible="{Binding ShowTeleOp}"
                             Minimum="0"
                             Value="{Binding TeleOpNetScore}" />
 
-                        <TextBlock FontWeight="Bold">
+                        <TextBlock FontWeight="Bold" IsVisible="{Binding ShowTeleOp}">
                             Climb:
                         </TextBlock>
 
-                        <StackPanel Orientation="Vertical">
+                        <StackPanel IsVisible="{Binding ShowTeleOp}" Orientation="Vertical">
                             <RadioButton
                                 Content="None"
                                 GroupName="TBreakdown2025"
@@ -315,79 +368,91 @@
                         Grid.Column="2"
                         Orientation="Vertical">
 
-                        <TextBlock FontWeight="Bold">
+                        <TextBlock Height="32" FontWeight="Bold">
                             MISS
                         </TextBlock>
 
                         <NumericUpDown
                             FormatString="0"
+                            IsVisible="{Binding ShowAuto}"
                             Minimum="0"
                             Value="{Binding AutoCoralL4Miss}" />
 
                         <NumericUpDown
                             FormatString="0"
+                            IsVisible="{Binding ShowAuto}"
                             Minimum="0"
                             Value="{Binding AutoCoralL3Miss}" />
 
                         <NumericUpDown
                             FormatString="0"
+                            IsVisible="{Binding ShowAuto}"
                             Minimum="0"
                             Value="{Binding AutoCoralL2Miss}" />
 
                         <NumericUpDown
                             FormatString="0"
+                            IsVisible="{Binding ShowAuto}"
                             Minimum="0"
                             Value="{Binding AutoCoralL1Miss}" />
 
                         <NumericUpDown
                             FormatString="0"
+                            IsVisible="{Binding ShowAuto}"
                             Minimum="0"
                             Value="{Binding AutoProcessorMiss}" />
 
                         <NumericUpDown
                             FormatString="0"
+                            IsVisible="{Binding ShowAuto}"
                             Minimum="0"
                             Value="{Binding AutoNetMiss}" />
 
-                        <TextBlock Width="135" FontWeight="Bold">
+                        <TextBlock Height="25" FontWeight="Bold">
                             MISS
                         </TextBlock>
 
                         <NumericUpDown
                             FormatString="0"
+                            IsVisible="{Binding ShowTeleOp}"
                             Minimum="0"
                             Value="{Binding TeleOpCoralL4Miss}" />
 
                         <NumericUpDown
                             FormatString="0"
+                            IsVisible="{Binding ShowTeleOp}"
                             Minimum="0"
                             Value="{Binding TeleOpCoralL3Miss}" />
 
                         <NumericUpDown
                             FormatString="0"
+                            IsVisible="{Binding ShowTeleOp}"
                             Minimum="0"
                             Value="{Binding TeleOpCoralL2Miss}" />
 
                         <NumericUpDown
                             FormatString="0"
+                            IsVisible="{Binding ShowTeleOp}"
                             Minimum="0"
                             Value="{Binding TeleOpCoralL1Miss}" />
 
                         <NumericUpDown
                             FormatString="0"
+                            IsVisible="{Binding ShowTeleOp}"
                             Minimum="0"
                             Value="{Binding TeleOpProcessorMiss}" />
 
                         <NumericUpDown
                             FormatString="0"
+                            IsVisible="{Binding ShowTeleOp}"
                             Minimum="0"
                             Value="{Binding TeleOpNetMiss}" />
 
-                        <TextBlock FontWeight="Bold">
+                        <TextBlock FontWeight="Bold" IsVisible="{Binding ShowTeleOp}">
                             Teleop Breakdown:
                         </TextBlock>
 
-                        <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Vertical" IsVisible="{Binding ShowTeleOp}">
                             <RadioButton
                                 Content="Success"
                                 GroupName="EClimb2025"

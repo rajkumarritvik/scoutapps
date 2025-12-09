@@ -52,8 +52,22 @@ namespace ScoutApp.ViewModels
             ShowText = !ShowText;
         }
 
-        public MainViewModel()
+        [ObservableProperty]
+        private bool showAuto = true;
+
+        [RelayCommand]
+        private void ToggleAuto()
         {
+            ShowAuto = !ShowAuto;
+        }
+
+        [ObservableProperty]
+        private bool showTeleOp = false;
+
+        [RelayCommand]
+        private void ToggleTeleOp()
+        {
+            ShowTeleOp = !ShowTeleOp;
         }
 
         // BEGIN string
