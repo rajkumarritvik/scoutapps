@@ -8,42 +8,68 @@ using QRCoder;
 
 namespace ScoutApp.ViewModels
 {
-    // BEGIN enum (part 1)
     public enum AutoStartingPosition
     {
         Left,
         Middle,
         Right
     }
-    // END enum (part 1)
-
-    // BEGIN enum (part 1)
-    public enum TBreakdown2025
+    public enum Breakdown2026
     {
         None,
         Tipped,
         MechanicalFailure,
         Incapacitated,
-        CoralStuck,
-        StuckOnAlgae
+        FuelStuck,
+        Beached
     }
-    // END enum (part 1)
-
-    // BEGIN enum (part 1)
-    public enum EClimb2025
+    public enum Climb2026
     {
-        Success,
+        L1,
+        L2,
+        L3,
         Failed,
-        DidNotAttempt,
-        DeepCage,
-        Parked,
-        ShallowCage
+        DidNotAttempt
     }
-    // END enum (part 1)
+
+    public enum HeadingButtons
+    {
+        PreMatch,
+        Auto,
+        TeleOp,
+        Endgame,
+        PostMatch
+    }
 
     public partial class MainViewModel : ObservableObject
     {
-         [ObservableProperty]
+        [RelayCommand]
+        private void HeadingButton(object parameter)
+        {
+            if (parameter is string commandName)
+            {
+                switch (commandName)
+                {
+                    case "PreMatch":
+                        SelectedHeadingButton = HeadingButtons.PreMatch;
+                        break;
+                    case "Auto":
+                        SelectedHeadingButton = HeadingButtons.Auto;
+                        break;
+                    case "TeleOp":
+                        SelectedHeadingButton = HeadingButtons.TeleOp;
+                        break;
+                    case "Endgame":
+                        SelectedHeadingButton = HeadingButtons.Endgame;
+                        break;
+                    case "PostMatch":
+                        SelectedHeadingButton = HeadingButtons.PostMatch;
+                        break;
+                }
+            }
+        }
+
+        [ObservableProperty]
         private bool showText = false;
 
         [RelayCommand]
@@ -70,270 +96,208 @@ namespace ScoutApp.ViewModels
             ShowTeleOp = !ShowTeleOp;
         }
 
-        // BEGIN string
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private string? _ScoutName;
-        // END string
 
-        // BEGIN bool
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private bool _AutoLeave = true;
-        // END bool
 
-        // BEGIN int
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _TeamNumber32 = 0;
-        // END int
 
-        // BEGIN int
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _MatchNumber = 0;
-        // END int
 
-        // BEGIN int
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _AutoCoralL4Score = 0;
-        // END int
 
-        // BEGIN int
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _AutoCoralL3Score = 0;
-        // END int
 
-        // BEGIN int
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _AutoCoralL2Score = 0;
-        // END int
 
-        // BEGIN int
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _AutoCoralL1Score = 0;
-        // END int
 
-        // BEGIN int
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _AutoCoralL4Miss = 0;
-        // END int
 
-        // BEGIN int
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _AutoCoralL3Miss = 0;
-        // END int
 
-        // BEGIN int
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _AutoCoralL2Miss = 0;
-        // END int
 
-        // BEGIN int
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _AutoCoralL1Miss = 0;
-        // END int
 
-        // BEGIN bool
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private bool _GroundPickup = false;
-        // END bool
 
-        // BEGIN int
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _TeleOpCoralL4Score = 0;
-        // END int
 
-        // BEGIN int
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _TeleOpCoralL3Score = 0;
-        // END int
 
-        // BEGIN int
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _TeleOpCoralL2Score = 0;
-        // END int
 
-        // BEGIN int
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _TeleOpCoralL1Score = 0;
-        // END int
 
-        // BEGIN int
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _TeleOpCoralL4Miss = 0;
-        // END int
 
-        // BEGIN int
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _TeleOpCoralL3Miss = 0;
-        // END int
 
-        // BEGIN int
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _TeleOpCoralL2Miss = 0;
-        // END int
 
-        // BEGIN int
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _TeleOpCoralL1Miss = 0;
-        // END int
 
-        // BEGIN int
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _AutoProcessorScore = 0;
-        // END int
 
-        // BEGIN int
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _AutoProcessorMiss = 0;
-        // END int
 
-        // BEGIN int
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _AutoNetScore = 0;
-        // END int
 
-        // BEGIN int
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _AutoNetMiss = 0;
-        // END int
 
-        // BEGIN int
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _TeleOpProcessorScore = 0;
-        // END int
 
-        // BEGIN int
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _TeleOpProcessorMiss = 0;
-        // END int
 
-        // BEGIN int
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _TeleOpNetScore = 0;
-        // END int
 
-        // BEGIN int
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _TeleOpNetMiss = 0;
-        // END int
 
-        // BEGIN enum (part 2)
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private AutoStartingPosition _SPosition2025;
-        // END enum (part 2)
 
-        // BEGIN enum (part 2)
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private TBreakdown2025 _TeleOpBreakdown;
-        // END enum (part 2)
+        private Breakdown2026 _Breakdown;
 
-        // BEGIN enum (part 2)
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private EClimb2025 _TeleOpClimb;
-        // END enum (part 2)
+        private Climb2026 _Climb;
 
-        // Summary will change based on all the fields that
-        // have [NotifyPropertyChangedFor(nameof(Summary))].
+        [ObservableProperty]
+        private HeadingButtons _SelectedHeadingButton = HeadingButtons.PreMatch;
+
+        // Summary will change based on all the fields that have [NotifyPropertyChangedFor(nameof(Summary))].
         public string Summary
         {
             get
             {
                 {
                     return $$"""
-ScoutName:{{ScoutName}}
-AutoStartingPosition:{{SPosition2025}}
-TeamNumber:{{TeamNumber32}}
-MatchNumber:{{MatchNumber}}
-AutoLeave:{{AutoLeave}}
-AutoL4-Score:{{AutoCoralL4Score}}
-AutoL3-Score:{{AutoCoralL3Score}}
-AutoL2-Score:{{AutoCoralL2Score}}
-AutoL1-Score:{{AutoCoralL1Score}}
-AutoL4-Miss:{{AutoCoralL4Miss}}
-AutoL3-Miss:{{AutoCoralL3Miss}}
-AutoL2-Miss:{{AutoCoralL2Miss}}
-AutoL1-Miss:{{AutoCoralL1Miss}}
-GroundPickup:{{GroundPickup}}
-TeleOpL4-Score:{{TeleOpCoralL4Score}}
-TeleOpL3-Score:{{TeleOpCoralL3Score}}
-TeleOpL2-Score:{{TeleOpCoralL2Score}}
-TeleOpL1-Score:{{TeleOpCoralL1Score}}
-TeleOpL4-Miss:{{TeleOpCoralL4Miss}}
-TeleOpL3-Miss:{{TeleOpCoralL3Miss}}
-TeleOpL2-Miss:{{TeleOpCoralL2Miss}}
-TeleOpL1-Miss:{{TeleOpCoralL1Miss}}
-AutoProcessor-Score:{{AutoProcessorScore}}
-AutoProcessor-Miss:{{AutoProcessorMiss}}
-AutoNet-Score:{{AutoNetScore}}
-AutoNet-Miss:{{AutoNetMiss}}
-TeleOpProcessor-Score:{{TeleOpProcessorScore}}
-TeleOpProcessor-Miss:{{TeleOpProcessorMiss}}
-TeleOpNet-Score:{{TeleOpNetScore}}
-TeleOpNet-Miss:{{TeleOpNetMiss}}
-TeleOpBreakdown:{{TeleOpBreakdown}}
-Climb:{{TeleOpClimb}}
+ScoutName: {{ScoutName}}
+AutoStartingPosition: {{SPosition2025}}
+TeamNumber: {{TeamNumber32}}
+MatchNumber: {{MatchNumber}}
+AutoLeave: {{AutoLeave}}
+AutoL4-Score: {{AutoCoralL4Score}}
+AutoL3-Score: {{AutoCoralL3Score}}
+AutoL2-Score: {{AutoCoralL2Score}}
+AutoL1-Score: {{AutoCoralL1Score}}
+AutoL4-Miss: {{AutoCoralL4Miss}}
+AutoL3-Miss: {{AutoCoralL3Miss}}
+AutoL2-Miss: {{AutoCoralL2Miss}}
+AutoL1-Miss: {{AutoCoralL1Miss}}
+GroundPickup: {{GroundPickup}}
+TeleOpL4-Score: {{TeleOpCoralL4Score}}
+TeleOpL3-Score: {{TeleOpCoralL3Score}}
+TeleOpL2-Score: {{TeleOpCoralL2Score}}
+TeleOpL1-Score: {{TeleOpCoralL1Score}}
+TeleOpL4-Miss: {{TeleOpCoralL4Miss}}
+TeleOpL3-Miss: {{TeleOpCoralL3Miss}}
+TeleOpL2-Miss: {{TeleOpCoralL2Miss}}
+TeleOpL1-Miss: {{TeleOpCoralL1Miss}}
+AutoProcessor-Score: {{AutoProcessorScore}}
+AutoProcessor-Miss: {{AutoProcessorMiss}}
+AutoNet-Score: {{AutoNetScore}}
+AutoNet-Miss: {{AutoNetMiss}}
+TeleOpProcessor-Score: {{TeleOpProcessorScore}}
+TeleOpProcessor-Miss: {{TeleOpProcessorMiss}}
+TeleOpNet-Score: {{TeleOpNetScore}}
+TeleOpNet-Miss: {{TeleOpNetMiss}}
+Breakdown: {{Breakdown}}
+Climb: {{Climb}}
 """;
                 }
             }
@@ -377,8 +341,8 @@ TPS-{{TeleOpProcessorScore}}
 TPM-{{TeleOpProcessorMiss}}
 TNS-{{TeleOpNetScore}}
 TNM-{{TeleOpNetMiss}}
-TBK-{{TeleOpBreakdown}}
-CLB-{{TeleOpClimb}}
+BD-{{Breakdown}}
+CLB-{{Climb}}
 """;
                 using (QRCodeGenerator qrGenerator = new QRCodeGenerator())
                 using (QRCodeData qrCodeData = qrGenerator.CreateQrCode(textForQRCode, QRCodeGenerator.ECCLevel.Q))

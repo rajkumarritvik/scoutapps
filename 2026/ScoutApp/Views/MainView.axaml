@@ -21,466 +21,502 @@
 
     <UserControl.Resources>
         <cvt:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
+        <Color x:Key="black_color">#000000</Color>
+        <Color x:Key="black2_color">#000100</Color>
+        <Color x:Key="white_color">#FFFFFF</Color>
+
+        <Color x:Key="text_color">#f0f9fe</Color>
+        <Color x:Key="background_color">#021c2c</Color>
+        <Color x:Key="accent_color">#f36716</Color>
+        <Color x:Key="lightgrey_color">#C2C4C3</Color>
+        <Color x:Key="offwhite_color">#D1CAC3</Color>
+        <Color x:Key="darkgrey_color">#676767</Color>
+        <Color x:Key="orange_color">#FF5722</Color>
+        <Color x:Key="thirdbutton_color">#DED6CE</Color>
+        <Color x:Key="secondary_color">#03263a</Color>
+        <Color x:Key="error_color">#F2110C</Color>
+        <Color x:Key="green_color">#1FA659</Color>
+
+        <SolidColorBrush x:Key="text" Color="{StaticResource text_color}" />
+        <SolidColorBrush x:Key="background" Color="{StaticResource background_color}" />
+        <SolidColorBrush x:Key="accent" Color="{StaticResource accent_color}" />
+        <SolidColorBrush x:Key="lightgrey" Color="{StaticResource lightgrey_color}" />
+        <SolidColorBrush x:Key="offwhite" Color="{StaticResource offwhite_color}" />
+        <SolidColorBrush x:Key="darkgrey" Color="{StaticResource darkgrey_color}" />
+        <SolidColorBrush x:Key="orange" Color="{StaticResource orange_color}" />
+        <SolidColorBrush x:Key="thirdbutton" Color="{StaticResource thirdbutton_color}" />
+        <SolidColorBrush x:Key="secondary" Color="{StaticResource secondary_color}" />
+        <SolidColorBrush x:Key="error" Color="{StaticResource error_color}" />
+        <SolidColorBrush x:Key="green" Color="{StaticResource green_color}" />
     </UserControl.Resources>
 
     <ScrollViewer VerticalScrollBarVisibility="Visible">
-
         <Grid
-            Width="542"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Background="Gainsboro"
-            ColumnDefinitions="Auto,*"
-            RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+            Background="{StaticResource background}"
+            ColumnDefinitions="Auto,Auto,Auto,Auto,Auto"
+            RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto">
 
-            <TextBlock
+            <Button
                 Grid.Row="0"
                 Grid.Column="0"
-                FontWeight="Bold">
-                Scout Name:
-            </TextBlock>
-            <TextBox
+                Margin="10,10,10,0"
+                Background="{StaticResource lightgrey}"
+                Command="{Binding HeadingButtonCommand}"
+                CommandParameter="PreMatch"
+                Content="PRE-MATCH"
+                FontWeight="Bold"
+                Foreground="{StaticResource accent}" />
+            <Button
                 Grid.Row="0"
                 Grid.Column="1"
-                Text="{Binding ScoutName}" />
+                Margin="10,10,10,0"
+                Background="{StaticResource lightgrey}"
+                Command="{Binding HeadingButtonCommand}"
+                CommandParameter="Auto"
+                Content="AUTO"
+                FontWeight="Bold"
+                Foreground="{StaticResource accent}" />
+            <Button
+                Grid.Row="0"
+                Grid.Column="2"
+                Margin="10,10,10,0"
+                Background="{StaticResource lightgrey}"
+                Command="{Binding HeadingButtonCommand}"
+                CommandParameter="TeleOp"
+                Content="TELEOP"
+                FontWeight="Bold"
+                Foreground="{StaticResource accent}" />
+            <Button
+                Grid.Row="0"
+                Grid.Column="3"
+                Margin="10,10,10,0"
+                Background="{StaticResource lightgrey}"
+                Command="{Binding HeadingButtonCommand}"
+                CommandParameter="Endgame"
+                Content="ENDGAME"
+                FontWeight="Bold"
+                Foreground="{StaticResource accent}" />
+            <Button
+                Grid.Row="0"
+                Grid.Column="4"
+                Margin="10,10,10,0"
+                Background="{StaticResource lightgrey}"
+                Command="{Binding HeadingButtonCommand}"
+                CommandParameter="PostMatch"
+                Content="POST-MATCH"
+                FontWeight="Bold"
+                Foreground="{StaticResource accent}" />
 
-            <TextBlock
-                Grid.Row="1"
-                Grid.Column="0"
-                FontWeight="Bold">
-                Match Number:
-            </TextBlock>
-            <NumericUpDown
-                Grid.Row="1"
-                Grid.Column="1"
-                FormatString="0"
-                Minimum="0"
-                Value="{Binding MatchNumber}" />
-
-            <TextBlock
-                Grid.Row="2"
-                Grid.Column="0"
-                FontWeight="Bold">
-                Team Number:
-            </TextBlock>
-            <NumericUpDown
-                Grid.Row="2"
-                Grid.Column="1"
-                FormatString="0"
-                Minimum="0"
-                Value="{Binding TeamNumber32}" />
-
-            <TextBlock
-                Grid.Row="3"
-                Grid.Column="0"
-                Width="130"
-                FontWeight="Bold">
-                Starting Position:
-            </TextBlock>
+            <!--  Pre-Match  -->
             <StackPanel
-                Grid.Row="3"
-                Grid.Column="1"
+                Grid.Row="1"
+                Grid.ColumnSpan="4"
+                HorizontalAlignment="Right"
+                IsVisible="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.PreMatch}}"
                 Orientation="Horizontal">
-                <RadioButton
-                    Width="137"
-                    Content="Left"
-                    GroupName="AutoStartingPosition"
-                    IsChecked="{Binding SPosition2025, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:AutoStartingPosition.Left}}" />
-                <RadioButton
-                    Width="138"
-                    Content="Middle"
-                    GroupName="AutoStartingPosition"
-                    IsChecked="{Binding SPosition2025, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:AutoStartingPosition.Middle}}" />
-                <RadioButton
-                    Width="137"
-                    Content="Right"
-                    GroupName="AutoStartingPosition"
-                    IsChecked="{Binding SPosition2025, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:AutoStartingPosition.Right}}" />
+
+                <StackPanel Orientation="Vertical">
+
+                    <TextBlock
+                        Height="32"
+                        Margin="10,10"
+                        FontWeight="Bold">
+                        Scout Name:
+                    </TextBlock>
+
+                    <TextBlock
+                        Height="32"
+                        Margin="10,10"
+                        FontWeight="Bold">
+                        Match Number:
+                    </TextBlock>
+
+                    <TextBlock
+                        Height="32"
+                        Margin="10,10"
+                        FontWeight="Bold">
+                        Team Number:
+                    </TextBlock>
+
+                    <TextBlock
+                        Height="32"
+                        Margin="10,10"
+                        FontWeight="Bold">
+                        Starting Position:
+                    </TextBlock>
+
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical">
+
+                    <TextBox Margin="10,10" Text="{Binding ScoutName}" />
+
+                    <NumericUpDown
+                        Margin="10,10"
+                        FormatString="0"
+                        Minimum="0"
+                        Value="{Binding MatchNumber}" />
+
+                    <NumericUpDown
+                        Margin="10,10"
+                        FormatString="0"
+                        Minimum="0"
+                        Value="{Binding TeamNumber32}" />
+
+                    <StackPanel
+                        Margin="10,10"
+                        HorizontalAlignment="Stretch"
+                        Orientation="Horizontal">
+                        <RadioButton
+                            Content="Left"
+                            GroupName="AutoStartingPosition"
+                            IsChecked="{Binding SPosition2025, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:AutoStartingPosition.Left}}" />
+                        <RadioButton
+                            Content="Middle"
+                            GroupName="AutoStartingPosition"
+                            IsChecked="{Binding SPosition2025, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:AutoStartingPosition.Middle}}" />
+                        <RadioButton
+                            Content="Right"
+                            GroupName="AutoStartingPosition"
+                            IsChecked="{Binding SPosition2025, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:AutoStartingPosition.Right}}" />
+                    </StackPanel>
+
+                </StackPanel>
+
             </StackPanel>
 
-            <TextBlock
-                Grid.Row="4"
-                Grid.Column="0"
-                FontWeight="Bold">
-                Auto Leave:
-            </TextBlock>
-            <CheckBox
-                Grid.Row="4"
-                Grid.Column="1"
-                IsChecked="{Binding AutoLeave}" />
-
+            <!--  Post-Match  -->
             <StackPanel
-                Grid.Row="6"
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
+                Grid.Row="2"
+                Grid.ColumnSpan="4"
+                HorizontalAlignment="Right"
+                IsVisible="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.PostMatch}}"
                 Orientation="Vertical">
                 <Button
+                    HorizontalAlignment="Center"
+                    HorizontalContentAlignment="Center"
                     Command="{Binding ToggleTextCommand}"
                     Content="Summary"
-                    FontWeight="Bold" />
+                    FontWeight="Bold"
+                    Foreground="{StaticResource}" />
                 <TextBlock IsVisible="{Binding ShowText}" Text="{Binding Summary, Mode=OneWay}" />
+                <Image MaxWidth="300" Source="{Binding QRCode1}" />
             </StackPanel>
 
-            <Image
-                Grid.Row="7"
+            <!--  Endgame  -->
+            <StackPanel
+                Grid.Row="3"
                 Grid.Column="0"
-                Grid.ColumnSpan="2"
-                MaxWidth="300"
-                Source="{Binding QRCode1}" />
+                Grid.ColumnSpan="4"
+                HorizontalAlignment="Right"
+                IsVisible="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.Endgame}}"
+                Orientation="Horizontal">
 
+                <StackPanel Orientation="Vertical">
+
+                    <TextBlock FontWeight="Bold">
+                        Breakdown:
+                    </TextBlock>
+                    <StackPanel Orientation="Vertical">
+                        <RadioButton
+                            Content="None"
+                            GroupName="Breakdown2026"
+                            IsChecked="{Binding Breakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:Breakdown2026.None}}" />
+                        <RadioButton
+                            Content="Tipped"
+                            GroupName="Breakdown2026"
+                            IsChecked="{Binding Breakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:Breakdown2026.Tipped}}" />
+                        <RadioButton
+                            Content="Mechanical Failure"
+                            GroupName="Breakdown2026"
+                            IsChecked="{Binding Breakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:Breakdown2026.MechanicalFailure}}" />
+                        <RadioButton
+                            Content="Incapacitated"
+                            GroupName="Breakdown2026"
+                            IsChecked="{Binding Breakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:Breakdown2026.Incapacitated}}" />
+                        <RadioButton
+                            Content="Coral Stuck"
+                            GroupName="Breakdown2026"
+                            IsChecked="{Binding Breakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:Breakdown2026.FuelStuck}}" />
+                        <RadioButton
+                            Content="Stuck on Algae"
+                            GroupName="Breakdown2026"
+                            IsChecked="{Binding Breakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:Breakdown2026.Beached}}" />
+                    </StackPanel>
+
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical">
+
+                    <TextBlock FontWeight="Bold">
+                        Climb:
+                    </TextBlock>
+                    <StackPanel Orientation="Vertical">
+                        <RadioButton
+                            Content="L1"
+                            GroupName="Climb2026"
+                            IsChecked="{Binding Climb, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:Climb2026.L1}}" />
+                        <RadioButton
+                            Content="L2"
+                            GroupName="Climb2026"
+                            IsChecked="{Binding Climb, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:Climb2026.L2}}" />
+                        <RadioButton
+                            Content="L3"
+                            GroupName="Climb2026"
+                            IsChecked="{Binding Climb, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:Climb2026.L3}}" />
+                        <RadioButton
+                            Content="Failed"
+                            GroupName="Climb2026"
+                            IsChecked="{Binding Climb, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:Climb2026.Failed}}" />
+                        <RadioButton
+                            Content="Did Not Attempt"
+                            GroupName="Climb2026"
+                            IsChecked="{Binding Climb, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:Climb2026.DidNotAttempt}}" />
+                    </StackPanel>
+
+                </StackPanel>
+
+            </StackPanel>
+
+            <!--  Auto  -->
+            <StackPanel
+                Grid.Row="4"
+                Grid.ColumnSpan="4"
+                HorizontalAlignment="Right"
+                IsVisible="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.Auto}}"
+                Orientation="Horizontal">
+
+                <StackPanel Orientation="Vertical">
+
+                    <TextBlock
+                        Height="32"
+                        Margin="0,32,0,0"
+                        FontWeight="Bold">
+                        L4
+                    </TextBlock>
+
+                    <TextBlock Height="32" FontWeight="Bold">
+                        L3
+                    </TextBlock>
+
+                    <TextBlock Height="32" FontWeight="Bold">
+                        L2
+                    </TextBlock>
+
+                    <TextBlock Height="32" FontWeight="Bold">
+                        L1
+                    </TextBlock>
+
+                    <TextBlock Height="32" FontWeight="Bold">
+                        Processor
+                    </TextBlock>
+
+                    <TextBlock Height="32" FontWeight="Bold">
+                        Net
+                    </TextBlock>
+
+                    <TextBlock Height="32" FontWeight="Bold">
+                        Auto Leave:
+                    </TextBlock>
+
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical">
+
+                    <TextBlock Height="32" FontWeight="Bold">
+                        SCORE
+                    </TextBlock>
+
+                    <NumericUpDown
+                        FormatString="0"
+                        Minimum="0"
+                        Value="{Binding AutoCoralL4Score}" />
+
+                    <NumericUpDown
+                        FormatString="0"
+                        Minimum="0"
+                        Value="{Binding AutoCoralL3Score}" />
+
+                    <NumericUpDown
+                        FormatString="0"
+                        Minimum="0"
+                        Value="{Binding AutoCoralL2Score}" />
+
+                    <NumericUpDown
+                        FormatString="0"
+                        Minimum="0"
+                        Value="{Binding AutoCoralL1Score}" />
+
+                    <NumericUpDown
+                        FormatString="0"
+                        Minimum="0"
+                        Value="{Binding AutoProcessorScore}" />
+
+                    <NumericUpDown
+                        FormatString="0"
+                        Minimum="0"
+                        Value="{Binding AutoNetScore}" />
+
+                    <CheckBox HorizontalAlignment="Right" IsChecked="{Binding AutoLeave}" />
+
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical">
+
+                    <TextBlock Height="32" FontWeight="Bold">
+                        MISS
+                    </TextBlock>
+
+                    <NumericUpDown
+                        FormatString="0"
+                        Minimum="0"
+                        Value="{Binding AutoCoralL4Miss}" />
+
+                    <NumericUpDown
+                        FormatString="0"
+                        Minimum="0"
+                        Value="{Binding AutoCoralL3Miss}" />
+
+                    <NumericUpDown
+                        FormatString="0"
+                        Minimum="0"
+                        Value="{Binding AutoCoralL2Miss}" />
+
+                    <NumericUpDown
+                        FormatString="0"
+                        Minimum="0"
+                        Value="{Binding AutoCoralL1Miss}" />
+
+                    <NumericUpDown
+                        FormatString="0"
+                        Minimum="0"
+                        Value="{Binding AutoProcessorMiss}" />
+
+                    <NumericUpDown
+                        FormatString="0"
+                        Minimum="0"
+                        Value="{Binding AutoNetMiss}" />
+
+                </StackPanel>
+
+            </StackPanel>
+
+            <!--  TeleOp  -->
             <StackPanel
                 Grid.Row="5"
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                Orientation="Vertical">
+                Grid.ColumnSpan="4"
+                HorizontalAlignment="Right"
+                IsVisible="{Binding SelectedHeadingButton, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:HeadingButtons.TeleOp}}"
+                Orientation="Horizontal">
 
-                <Grid
-                    Width="542"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    ColumnDefinitions="Auto,*,*"
-                    RowDefinitions="Auto">
+                <StackPanel Orientation="Vertical">
 
-                    <StackPanel
-                        Grid.Row="0"
-                        Grid.Column="0"
-                        Orientation="Vertical">
+                    <TextBlock
+                        Height="32"
+                        Margin="0,32,0,0"
+                        FontWeight="Bold">
+                        L4
+                    </TextBlock>
 
-                        <Button
-                            Height="32"
-                            Command="{Binding ToggleAutoCommand}"
-                            Content="AUTO"
-                            FontWeight="Bold" />
+                    <TextBlock Height="32" FontWeight="Bold">
+                        L3
+                    </TextBlock>
 
-                        <TextBlock
-                            Width="130"
-                            Height="32"
-                            FontWeight="Bold"
-                            IsVisible="{Binding ShowAuto}">
-                            L4
-                        </TextBlock>
+                    <TextBlock Height="32" FontWeight="Bold">
+                        L2
+                    </TextBlock>
 
-                        <TextBlock
-                            Height="32"
-                            FontWeight="Bold"
-                            IsVisible="{Binding ShowAuto}">
-                            L3
-                        </TextBlock>
+                    <TextBlock Height="32" FontWeight="Bold">
+                        L1
+                    </TextBlock>
 
-                        <TextBlock
-                            Height="32"
-                            FontWeight="Bold"
-                            IsVisible="{Binding ShowAuto}">
-                            L2
-                        </TextBlock>
+                    <TextBlock Height="32" FontWeight="Bold">
+                        Processor
+                    </TextBlock>
 
-                        <TextBlock
-                            Height="32"
-                            FontWeight="Bold"
-                            IsVisible="{Binding ShowAuto}">
-                            L1
-                        </TextBlock>
+                    <TextBlock Height="32" FontWeight="Bold">
+                        Net
+                    </TextBlock>
 
-                        <TextBlock
-                            Height="32"
-                            FontWeight="Bold"
-                            IsVisible="{Binding ShowAuto}">
-                            Processor
-                        </TextBlock>
+                </StackPanel>
 
-                        <TextBlock
-                            Height="32"
-                            FontWeight="Bold"
-                            IsVisible="{Binding ShowAuto}">
-                            Net
-                        </TextBlock>
+                <StackPanel Orientation="Vertical">
 
-                        <Button
-                            Height="32"
-                            Command="{Binding ToggleTeleOpCommand}"
-                            Content="TELEOP"
-                            FontWeight="Bold" />
+                    <TextBlock Height="32" FontWeight="Bold">
+                        SCORE
+                    </TextBlock>
 
-                        <TextBlock
-                            Height="32"
-                            FontWeight="Bold"
-                            IsVisible="{Binding ShowTeleOp}">
-                            L4
-                        </TextBlock>
+                    <NumericUpDown
+                        FormatString="0"
+                        Minimum="0"
+                        Value="{Binding TeleOpCoralL4Score}" />
 
-                        <TextBlock
-                            Height="32"
-                            FontWeight="Bold"
-                            IsVisible="{Binding ShowTeleOp}">
-                            L3
-                        </TextBlock>
+                    <NumericUpDown
+                        FormatString="0"
+                        Minimum="0"
+                        Value="{Binding TeleOpCoralL3Score}" />
 
-                        <TextBlock
-                            Height="32"
-                            FontWeight="Bold"
-                            IsVisible="{Binding ShowTeleOp}">
-                            L2
-                        </TextBlock>
+                    <NumericUpDown
+                        FormatString="0"
+                        Minimum="0"
+                        Value="{Binding TeleOpCoralL2Score}" />
 
-                        <TextBlock
-                            Height="32"
-                            FontWeight="Bold"
-                            IsVisible="{Binding ShowTeleOp}">
-                            L1
-                        </TextBlock>
+                    <NumericUpDown
+                        FormatString="0"
+                        Minimum="0"
+                        Value="{Binding TeleOpCoralL1Score}" />
 
-                        <TextBlock
-                            Height="32"
-                            FontWeight="Bold"
-                            IsVisible="{Binding ShowTeleOp}">
-                            Processor
-                        </TextBlock>
+                    <NumericUpDown
+                        FormatString="0"
+                        Minimum="0"
+                        Value="{Binding TeleOpProcessorScore}" />
 
-                        <TextBlock
-                            Height="32"
-                            FontWeight="Bold"
-                            IsVisible="{Binding ShowTeleOp}">
-                            Net
-                        </TextBlock>
+                    <NumericUpDown
+                        FormatString="0"
+                        Minimum="0"
+                        Value="{Binding TeleOpNetScore}" />
 
-                    </StackPanel>
+                </StackPanel>
 
-                    <StackPanel
-                        Grid.Row="0"
-                        Grid.Column="1"
-                        Orientation="Vertical">
+                <StackPanel Orientation="Vertical">
 
-                        <TextBlock Height="32" FontWeight="Bold">
-                            SCORE
-                        </TextBlock>
+                    <TextBlock Height="32" FontWeight="Bold">
+                        MISS
+                    </TextBlock>
 
-                        <NumericUpDown
-                            FormatString="0"
-                            IsVisible="{Binding ShowAuto}"
-                            Minimum="0"
-                            Value="{Binding AutoCoralL4Score}" />
+                    <NumericUpDown
+                        FormatString="0"
+                        Minimum="0"
+                        Value="{Binding TeleOpCoralL4Miss}" />
 
-                        <NumericUpDown
-                            FormatString="0"
-                            IsVisible="{Binding ShowAuto}"
-                            Minimum="0"
-                            Value="{Binding AutoCoralL3Score}" />
+                    <NumericUpDown
+                        FormatString="0"
+                        Minimum="0"
+                        Value="{Binding TeleOpCoralL3Miss}" />
 
-                        <NumericUpDown
-                            FormatString="0"
-                            IsVisible="{Binding ShowAuto}"
-                            Minimum="0"
-                            Value="{Binding AutoCoralL2Score}" />
+                    <NumericUpDown
+                        FormatString="0"
+                        Minimum="0"
+                        Value="{Binding TeleOpCoralL2Miss}" />
 
-                        <NumericUpDown
-                            FormatString="0"
-                            IsVisible="{Binding ShowAuto}"
-                            Minimum="0"
-                            Value="{Binding AutoCoralL1Score}" />
+                    <NumericUpDown
+                        FormatString="0"
+                        Minimum="0"
+                        Value="{Binding TeleOpCoralL1Miss}" />
 
-                        <NumericUpDown
-                            FormatString="0"
-                            IsVisible="{Binding ShowAuto}"
-                            Minimum="0"
-                            Value="{Binding AutoProcessorScore}" />
+                    <NumericUpDown
+                        FormatString="0"
+                        Minimum="0"
+                        Value="{Binding TeleOpProcessorMiss}" />
 
-                        <NumericUpDown
-                            FormatString="0"
-                            IsVisible="{Binding ShowAuto}"
-                            Minimum="0"
-                            Value="{Binding AutoNetScore}" />
+                    <NumericUpDown
+                        FormatString="0"
+                        Minimum="0"
+                        Value="{Binding TeleOpNetMiss}" />
 
-                        <TextBlock Height="32" FontWeight="Bold">
-                            SCORE
-                        </TextBlock>
-
-                        <NumericUpDown
-                            FormatString="0"
-                            IsVisible="{Binding ShowTeleOp}"
-                            Minimum="0"
-                            Value="{Binding TeleOpCoralL4Score}" />
-
-                        <NumericUpDown
-                            FormatString="0"
-                            IsVisible="{Binding ShowTeleOp}"
-                            Minimum="0"
-                            Value="{Binding TeleOpCoralL3Score}" />
-
-                        <NumericUpDown
-                            FormatString="0"
-                            IsVisible="{Binding ShowTeleOp}"
-                            Minimum="0"
-                            Value="{Binding TeleOpCoralL2Score}" />
-
-                        <NumericUpDown
-                            FormatString="0"
-                            IsVisible="{Binding ShowTeleOp}"
-                            Minimum="0"
-                            Value="{Binding TeleOpCoralL1Score}" />
-
-                        <NumericUpDown
-                            FormatString="0"
-                            IsVisible="{Binding ShowTeleOp}"
-                            Minimum="0"
-                            Value="{Binding TeleOpProcessorScore}" />
-
-                        <NumericUpDown
-                            FormatString="0"
-                            IsVisible="{Binding ShowTeleOp}"
-                            Minimum="0"
-                            Value="{Binding TeleOpNetScore}" />
-
-                        <TextBlock FontWeight="Bold" IsVisible="{Binding ShowTeleOp}">
-                            Climb:
-                        </TextBlock>
-
-                        <StackPanel IsVisible="{Binding ShowTeleOp}" Orientation="Vertical">
-                            <RadioButton
-                                Content="None"
-                                GroupName="TBreakdown2025"
-                                IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:TBreakdown2025.None}}" />
-                            <RadioButton
-                                Content="Tipped"
-                                GroupName="TBreakdown2025"
-                                IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:TBreakdown2025.Tipped}}" />
-                            <RadioButton
-                                Content="Mechanical Failure"
-                                GroupName="TBreakdown2025"
-                                IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:TBreakdown2025.MechanicalFailure}}" />
-                            <RadioButton
-                                Content="Incapacitated"
-                                GroupName="TBreakdown2025"
-                                IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:TBreakdown2025.Incapacitated}}" />
-                            <RadioButton
-                                Content="Coral Stuck"
-                                GroupName="TBreakdown2025"
-                                IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:TBreakdown2025.CoralStuck}}" />
-                            <RadioButton
-                                Content="Stuck on Algae"
-                                GroupName="TBreakdown2025"
-                                IsChecked="{Binding TeleOpBreakdown, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:TBreakdown2025.StuckOnAlgae}}" />
-                        </StackPanel>
-
-                    </StackPanel>
-
-                    <StackPanel
-                        Grid.Row="0"
-                        Grid.Column="2"
-                        Orientation="Vertical">
-
-                        <TextBlock Height="32" FontWeight="Bold">
-                            MISS
-                        </TextBlock>
-
-                        <NumericUpDown
-                            FormatString="0"
-                            IsVisible="{Binding ShowAuto}"
-                            Minimum="0"
-                            Value="{Binding AutoCoralL4Miss}" />
-
-                        <NumericUpDown
-                            FormatString="0"
-                            IsVisible="{Binding ShowAuto}"
-                            Minimum="0"
-                            Value="{Binding AutoCoralL3Miss}" />
-
-                        <NumericUpDown
-                            FormatString="0"
-                            IsVisible="{Binding ShowAuto}"
-                            Minimum="0"
-                            Value="{Binding AutoCoralL2Miss}" />
-
-                        <NumericUpDown
-                            FormatString="0"
-                            IsVisible="{Binding ShowAuto}"
-                            Minimum="0"
-                            Value="{Binding AutoCoralL1Miss}" />
-
-                        <NumericUpDown
-                            FormatString="0"
-                            IsVisible="{Binding ShowAuto}"
-                            Minimum="0"
-                            Value="{Binding AutoProcessorMiss}" />
-
-                        <NumericUpDown
-                            FormatString="0"
-                            IsVisible="{Binding ShowAuto}"
-                            Minimum="0"
-                            Value="{Binding AutoNetMiss}" />
-
-                        <TextBlock Height="25" FontWeight="Bold">
-                            MISS
-                        </TextBlock>
-
-                        <NumericUpDown
-                            FormatString="0"
-                            IsVisible="{Binding ShowTeleOp}"
-                            Minimum="0"
-                            Value="{Binding TeleOpCoralL4Miss}" />
-
-                        <NumericUpDown
-                            FormatString="0"
-                            IsVisible="{Binding ShowTeleOp}"
-                            Minimum="0"
-                            Value="{Binding TeleOpCoralL3Miss}" />
-
-                        <NumericUpDown
-                            FormatString="0"
-                            IsVisible="{Binding ShowTeleOp}"
-                            Minimum="0"
-                            Value="{Binding TeleOpCoralL2Miss}" />
-
-                        <NumericUpDown
-                            FormatString="0"
-                            IsVisible="{Binding ShowTeleOp}"
-                            Minimum="0"
-                            Value="{Binding TeleOpCoralL1Miss}" />
-
-                        <NumericUpDown
-                            FormatString="0"
-                            IsVisible="{Binding ShowTeleOp}"
-                            Minimum="0"
-                            Value="{Binding TeleOpProcessorMiss}" />
-
-                        <NumericUpDown
-                            FormatString="0"
-                            IsVisible="{Binding ShowTeleOp}"
-                            Minimum="0"
-                            Value="{Binding TeleOpNetMiss}" />
-
-                        <TextBlock FontWeight="Bold" IsVisible="{Binding ShowTeleOp}">
-                            Teleop Breakdown:
-                        </TextBlock>
-
-                        <StackPanel Orientation="Vertical" IsVisible="{Binding ShowTeleOp}">
-                            <RadioButton
-                                Content="Success"
-                                GroupName="EClimb2025"
-                                IsChecked="{Binding TeleOpClimb, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:EClimb2025.Success}}" />
-                            <RadioButton
-                                Content="Failed"
-                                GroupName="EClimb2025"
-                                IsChecked="{Binding TeleOpClimb, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:EClimb2025.Failed}}" />
-                            <RadioButton
-                                Content="Did Not Attempt"
-                                GroupName="EClimb2025"
-                                IsChecked="{Binding TeleOpClimb, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:EClimb2025.DidNotAttempt}}" />
-                            <RadioButton
-                                Content="Deep Cage"
-                                GroupName="EClimb2025"
-                                IsChecked="{Binding TeleOpClimb, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:EClimb2025.DeepCage}}" />
-                            <RadioButton
-                                Content="Shallow Cage"
-                                GroupName="EClimb2025"
-                                IsChecked="{Binding TeleOpClimb, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:EClimb2025.ShallowCage}}" />
-                            <RadioButton
-                                Content="Parked"
-                                GroupName="EClimb2025"
-                                IsChecked="{Binding TeleOpClimb, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static vm:EClimb2025.Parked}}" />
-                        </StackPanel>
-                    </StackPanel>
-
-                </Grid>
+                </StackPanel>
 
             </StackPanel>
 
