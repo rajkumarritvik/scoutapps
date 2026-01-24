@@ -1,4 +1,5 @@
 using System.IO;
+using System.Reflection.Metadata.Ecma335;
 using Avalonia.Media.Imaging;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -11,7 +12,7 @@ namespace ScoutApp.ViewModels
     public enum AutoStartingPosition
     {
         Left,
-        Middle,
+        Center,
         Right
     }
     public enum Breakdown2026
@@ -39,6 +40,16 @@ namespace ScoutApp.ViewModels
         TeleOp,
         Endgame,
         PostMatch
+    }
+
+    public enum AlliancePosition
+    {
+        Red1,
+        Red2,
+        Red3,
+        Blue1,
+        Blue2,
+        Blue3
     }
 
     public partial class MainViewModel : ObservableObject
@@ -70,30 +81,12 @@ namespace ScoutApp.ViewModels
         }
 
         [ObservableProperty]
-        private bool showText = false;
+        private bool showSummary = false;
 
         [RelayCommand]
-        private void ToggleText()
+        private void ToggleSummary()
         {
-            ShowText = !ShowText;
-        }
-
-        [ObservableProperty]
-        private bool showAuto = true;
-
-        [RelayCommand]
-        private void ToggleAuto()
-        {
-            ShowAuto = !ShowAuto;
-        }
-
-        [ObservableProperty]
-        private bool showTeleOp = false;
-
-        [RelayCommand]
-        private void ToggleTeleOp()
-        {
-            ShowTeleOp = !ShowTeleOp;
+            ShowSummary = !ShowSummary;
         }
 
         [ObservableProperty]
@@ -244,58 +237,61 @@ namespace ScoutApp.ViewModels
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private AutoStartingPosition _SPosition2025;
+        private AutoStartingPosition? _SPosition2026;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private Breakdown2026 _Breakdown;
+        private Breakdown2026 _Breakdown = Breakdown2026.None;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private Climb2026 _Climb;
+        private Climb2026? _Climb;
 
         [ObservableProperty]
         private HeadingButtons _SelectedHeadingButton = HeadingButtons.PreMatch;
 
-        // Summary will change based on all the fields that have [NotifyPropertyChangedFor(nameof(Summary))].
+        [ObservableProperty]
+        private AlliancePosition? _SelectedAlliancePosition;
+
         public string Summary
         {
             get
             {
                 {
                     return $$"""
-ScoutName: {{ScoutName}}
-AutoStartingPosition: {{SPosition2025}}
-TeamNumber: {{TeamNumber32}}
-MatchNumber: {{MatchNumber}}
-AutoLeave: {{AutoLeave}}
-AutoL4-Score: {{AutoCoralL4Score}}
-AutoL3-Score: {{AutoCoralL3Score}}
-AutoL2-Score: {{AutoCoralL2Score}}
-AutoL1-Score: {{AutoCoralL1Score}}
-AutoL4-Miss: {{AutoCoralL4Miss}}
-AutoL3-Miss: {{AutoCoralL3Miss}}
-AutoL2-Miss: {{AutoCoralL2Miss}}
-AutoL1-Miss: {{AutoCoralL1Miss}}
-GroundPickup: {{GroundPickup}}
-TeleOpL4-Score: {{TeleOpCoralL4Score}}
-TeleOpL3-Score: {{TeleOpCoralL3Score}}
-TeleOpL2-Score: {{TeleOpCoralL2Score}}
-TeleOpL1-Score: {{TeleOpCoralL1Score}}
-TeleOpL4-Miss: {{TeleOpCoralL4Miss}}
-TeleOpL3-Miss: {{TeleOpCoralL3Miss}}
-TeleOpL2-Miss: {{TeleOpCoralL2Miss}}
-TeleOpL1-Miss: {{TeleOpCoralL1Miss}}
-AutoProcessor-Score: {{AutoProcessorScore}}
-AutoProcessor-Miss: {{AutoProcessorMiss}}
-AutoNet-Score: {{AutoNetScore}}
-AutoNet-Miss: {{AutoNetMiss}}
-TeleOpProcessor-Score: {{TeleOpProcessorScore}}
-TeleOpProcessor-Miss: {{TeleOpProcessorMiss}}
-TeleOpNet-Score: {{TeleOpNetScore}}
-TeleOpNet-Miss: {{TeleOpNetMiss}}
+Scout Name: {{ScoutName}}
+Team Number: {{TeamNumber32}}
+Match Number: {{MatchNumber}}
+Alliance Position: {{SelectedAlliancePosition}}
+Auto Starting Position: {{SPosition2026}}
+Auto Leave: {{AutoLeave}}
+Auto L4 Score: {{AutoCoralL4Score}}
+Auto L3 Score: {{AutoCoralL3Score}}
+Auto L2 Score: {{AutoCoralL2Score}}
+Auto L1 Score: {{AutoCoralL1Score}}
+Auto L4 Miss: {{AutoCoralL4Miss}}
+Auto L3 Miss: {{AutoCoralL3Miss}}
+Auto L2 Miss: {{AutoCoralL2Miss}}
+Auto L1 Miss: {{AutoCoralL1Miss}}
+Ground Pickup: {{GroundPickup}}
+TeleOp L4 Score: {{TeleOpCoralL4Score}}
+TeleOp L3 Score: {{TeleOpCoralL3Score}}
+TeleOp L2 Score: {{TeleOpCoralL2Score}}
+TeleOp L1 Score: {{TeleOpCoralL1Score}}
+TeleOp L4 Miss: {{TeleOpCoralL4Miss}}
+TeleOp L3 Miss: {{TeleOpCoralL3Miss}}
+TeleOp L2 Miss: {{TeleOpCoralL2Miss}}
+TeleOp L1 Miss: {{TeleOpCoralL1Miss}}
+Auto Processor Score: {{AutoProcessorScore}}
+Auto Processor Miss: {{AutoProcessorMiss}}
+Auto Net Score: {{AutoNetScore}}
+Auto Net Miss: {{AutoNetMiss}}
+TeleOp Processor Score: {{TeleOpProcessorScore}}
+TeleOp Processor Miss: {{TeleOpProcessorMiss}}
+TeleOp Net Score: {{TeleOpNetScore}}
+TeleOp Net Miss: {{TeleOpNetMiss}}
 Breakdown: {{Breakdown}}
 Climb: {{Climb}}
 """;
@@ -303,8 +299,6 @@ Climb: {{Climb}}
             }
         }
 
-        // QRCode1 will change based on all the fields that
-        // have [NotifyPropertyChangedFor(nameof(QRCode1))].
         public Bitmap QRCode1
         {
             get
@@ -312,9 +306,10 @@ Climb: {{Climb}}
                 string textForQRCode =
                     $$"""
 Name-{{ScoutName}}
-SPos-{{SPosition2025}}
 Team-{{TeamNumber32}}
 Match-{{MatchNumber}}
+APos-{{SelectedAlliancePosition}}
+SPos-{{SPosition2026}}
 ALeave-{{AutoLeave}}
 AL4-{{AutoCoralL4Score}}
 AL3-{{AutoCoralL3Score}}
@@ -344,13 +339,18 @@ TNM-{{TeleOpNetMiss}}
 BD-{{Breakdown}}
 CLB-{{Climb}}
 """;
-                using (QRCodeGenerator qrGenerator = new QRCodeGenerator())
-                using (QRCodeData qrCodeData = qrGenerator.CreateQrCode(textForQRCode, QRCodeGenerator.ECCLevel.Q))
-                using (PngByteQRCode qrCode = new PngByteQRCode(qrCodeData))
+
+                if (SelectedAlliancePosition == null || SPosition2026 == null || Climb == null)
                 {
-                    byte[] data = qrCode.GetGraphic(20);
-                    return new Bitmap(new MemoryStream(data));
+                    byte[] fallback = System.Convert.FromBase64String("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII=");
+                    return new Bitmap(new MemoryStream(fallback));
                 }
+
+                using QRCodeGenerator qrGenerator = new();
+                using QRCodeData qrCodeData = qrGenerator.CreateQrCode(textForQRCode, QRCodeGenerator.ECCLevel.Q);
+                using PngByteQRCode qrCode = new(qrCodeData);
+                byte[] data = qrCode.GetGraphic(20);
+                return new Bitmap(new MemoryStream(data));
             }
         }
     }
