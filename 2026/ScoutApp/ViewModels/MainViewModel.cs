@@ -53,6 +53,41 @@ namespace ScoutApp.ViewModels
 
     public partial class MainViewModel : ObservableObject
     {
+        [RelayCommand]
+        private void NextMatch()
+        {
+            MatchNumber += 1;
+            SPosition2026 = null;
+            AutoMove = false;
+            AutoCoralL4Score = 0;
+            AutoCoralL3Score = 0;
+            AutoCoralL2Score = 0;
+            AutoCoralL1Score = 0;
+            AutoCoralL4Miss = 0;
+            AutoCoralL3Miss = 0;
+            AutoCoralL2Miss = 0;
+            AutoCoralL1Miss = 0;
+            TeleOpCoralL4Score = 0;
+            TeleOpCoralL3Score = 0;
+            TeleOpCoralL2Score = 0;
+            TeleOpCoralL1Score = 0;
+            TeleOpCoralL4Miss = 0;
+            TeleOpCoralL3Miss = 0;
+            TeleOpCoralL2Miss = 0;
+            TeleOpCoralL1Miss = 0;
+            AutoProcessorScore = 0;
+            AutoProcessorMiss = 0;
+            AutoNetScore = 0;
+            AutoNetMiss = 0;
+            TeleOpProcessorScore = 0;
+            TeleOpProcessorMiss = 0;
+            TeleOpNetScore = 0;
+            TeleOpNetMiss = 0;
+            Breakdown = Breakdown2026.None;
+            Climb = null;
+            ShowSummary = false;
+            SelectedHeadingButton = HeadingButtons.PreMatch;
+        }
 
         private static int? GetTeamNumberFromSchedule(int matchNumber, AlliancePosition? alliancePosition)
         {
@@ -138,7 +173,7 @@ namespace ScoutApp.ViewModels
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private bool _AutoLeave = true;
+        private bool _AutoMove = false;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
@@ -179,11 +214,6 @@ namespace ScoutApp.ViewModels
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private int _AutoCoralL1Miss = 0;
-
-        [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(Summary))]
-        [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private bool _GroundPickup = false;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
@@ -291,7 +321,7 @@ Team Number: {{TeamNumber}}
 Match Number: {{MatchNumber}}
 Alliance Position: {{SelectedAlliancePosition}}
 Auto Starting Position: {{SPosition2026}}
-Auto Leave: {{AutoLeave}}
+Auto Move: {{AutoMove}}
 Auto L4 Score: {{AutoCoralL4Score}}
 Auto L3 Score: {{AutoCoralL3Score}}
 Auto L2 Score: {{AutoCoralL2Score}}
@@ -300,7 +330,6 @@ Auto L4 Miss: {{AutoCoralL4Miss}}
 Auto L3 Miss: {{AutoCoralL3Miss}}
 Auto L2 Miss: {{AutoCoralL2Miss}}
 Auto L1 Miss: {{AutoCoralL1Miss}}
-Ground Pickup: {{GroundPickup}}
 TeleOp L4 Score: {{TeleOpCoralL4Score}}
 TeleOp L3 Score: {{TeleOpCoralL3Score}}
 TeleOp L2 Score: {{TeleOpCoralL2Score}}
@@ -335,7 +364,7 @@ Team-{{TeamNumber}}
 Match-{{MatchNumber}}
 APos-{{SelectedAlliancePosition}}
 SPos-{{SPosition2026}}
-ALeave-{{AutoLeave}}
+AMove-{{AutoMove}}
 AL4-{{AutoCoralL4Score}}
 AL3-{{AutoCoralL3Score}}
 AL2-{{AutoCoralL2Score}}
@@ -344,7 +373,6 @@ AM4-{{AutoCoralL4Miss}}
 AM3-{{AutoCoralL3Miss}}
 AM2-{{AutoCoralL2Miss}}
 AM1-{{AutoCoralL1Miss}}
-GPickup-{{GroundPickup}}
 TL4-{{TeleOpCoralL4Score}}
 TL3-{{TeleOpCoralL3Score}}
 TL2-{{TeleOpCoralL2Score}}
