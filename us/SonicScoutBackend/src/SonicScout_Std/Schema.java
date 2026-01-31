@@ -484,10 +484,10 @@ public final class Schema {
         _setShortField(37, (short)value.ordinal());
       }
 
-      public final int getTeamNumber32() {
+      public final int getTeamNumber() {
         return _getIntField(19);
       }
-      public final void setTeamNumber32(int value) {
+      public final void setTeamNumber(int value) {
         _setIntField(19, value);
       }
 
@@ -799,7 +799,7 @@ public final class Schema {
         }
       }
 
-      public final int getTeamNumber32() {
+      public final int getTeamNumber() {
         return _getIntField(19);
       }
 

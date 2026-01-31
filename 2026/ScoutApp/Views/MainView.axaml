@@ -170,7 +170,7 @@
                     HorizontalAlignment="Center"
                     FormatString="0"
                     Minimum="0"
-                    Value="{Binding TeamNumber32}" />
+                    Value="{Binding TeamNumber}" />
 
                 <TextBlock HorizontalAlignment="Center" FontWeight="Bold">
                     Alliance Position:

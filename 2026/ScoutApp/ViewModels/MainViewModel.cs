@@ -1,11 +1,9 @@
 using System.IO;
-using System.Reflection.Metadata.Ecma335;
+using System;
 using Avalonia.Media.Imaging;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using QRCoder;
-
-// Use Alt-Shift-F to format. Do this continually!
 
 namespace ScoutApp.ViewModels
 {
@@ -54,12 +52,41 @@ namespace ScoutApp.ViewModels
 
     public partial class MainViewModel : ObservableObject
     {
-        [RelayCommand]
-        private void HeadingButton(object parameter)
+
+        private static int? GetTeamNumberFromSchedule(int matchNumber, AlliancePosition? alliancePosition)
         {
-            if (parameter is string commandName)
+            if (alliancePosition == null)
+                return null;
+
+            return JsonToCSConverter.TryGetTeamNumber(matchNumber, alliancePosition.Value, out int teamNumber)
+                ? teamNumber
+                : null;
+        }
+
+        [RelayCommand]
+        private void UpdateTeamNumberFromSchedule()
+        {
+            int? scheduledTeamNumber = GetTeamNumberFromSchedule(MatchNumber, SelectedAlliancePosition);
+            if (scheduledTeamNumber.HasValue)
+                TeamNumber = scheduledTeamNumber.Value;
+        }
+
+        partial void OnMatchNumberChanged(int value)
+        {
+            UpdateTeamNumberFromSchedule();
+        }
+
+        partial void OnSelectedAlliancePositionChanged(AlliancePosition? value) => UpdateTeamNumberFromSchedule();
+
+        [ObservableProperty]
+        private HeadingButtons _SelectedHeadingButton = HeadingButtons.PreMatch;
+
+        [RelayCommand]
+        private void HeadingButton(object button)
+        {
+            if (button is string heading)
             {
-                switch (commandName)
+                switch (heading)
                 {
                     case "PreMatch":
                         SelectedHeadingButton = HeadingButtons.PreMatch;
@@ -97,17 +124,20 @@ namespace ScoutApp.ViewModels
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
         [NotifyPropertyChangedFor(nameof(QRCode1))]
+        private int _MatchNumber = 1;
+
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(Summary))]
+        [NotifyPropertyChangedFor(nameof(QRCode1))]
+        private int? _TeamNumber;
+
+        [ObservableProperty]
+        private AlliancePosition? _SelectedAlliancePosition;
+
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(Summary))]
+        [NotifyPropertyChangedFor(nameof(QRCode1))]
         private bool _AutoLeave = true;
-
-        [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(Summary))]
-        [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private int _TeamNumber32 = 0;
-
-        [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(Summary))]
-        [NotifyPropertyChangedFor(nameof(QRCode1))]
-        private int _MatchNumber = 0;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Summary))]
@@ -249,12 +279,6 @@ namespace ScoutApp.ViewModels
         [NotifyPropertyChangedFor(nameof(QRCode1))]
         private Climb2026? _Climb;
 
-        [ObservableProperty]
-        private HeadingButtons _SelectedHeadingButton = HeadingButtons.PreMatch;
-
-        [ObservableProperty]
-        private AlliancePosition? _SelectedAlliancePosition;
-
         public string Summary
         {
             get
@@ -262,7 +286,7 @@ namespace ScoutApp.ViewModels
                 {
                     return $$"""
 Scout Name: {{ScoutName}}
-Team Number: {{TeamNumber32}}
+Team Number: {{TeamNumber}}
 Match Number: {{MatchNumber}}
 Alliance Position: {{SelectedAlliancePosition}}
 Auto Starting Position: {{SPosition2026}}
@@ -306,7 +330,7 @@ Climb: {{Climb}}
                 string textForQRCode =
                     $$"""
 Name-{{ScoutName}}
-Team-{{TeamNumber32}}
+Team-{{TeamNumber}}
 Match-{{MatchNumber}}
 APos-{{SelectedAlliancePosition}}
 SPos-{{SPosition2026}}
@@ -342,7 +366,7 @@ CLB-{{Climb}}
 
                 if (SelectedAlliancePosition == null || SPosition2026 == null || Climb == null)
                 {
-                    byte[] fallback = System.Convert.FromBase64String("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII=");
+                    byte[] fallback = Convert.FromBase64String("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII=");
                     return new Bitmap(new MemoryStream(fallback));
                 }
 

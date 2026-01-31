@@ -75,7 +75,7 @@ struct RawMatchData {
   teleOpBreakdown @51 : TBreakdown2025;
   teleOpClimb @52 : EClimb2025;
   #TBA prematch and results sync
-  teamNumber32 @53 :Int32; #teamNumber32 bc there will be 9 and a half digits available to enter. Should be good for next 10+ years
+  TeamNumber @53 :Int32; #TeamNumber bc there will be 9 and a half digits available to enter. Should be good for next 10+ years
   teleOpCoralL4Miss @54 : Int16;
   teleOpCoralL3Miss @55 : Int16;
   teleOpCoralL2Miss @56 : Int16;
